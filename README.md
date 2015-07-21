@@ -10,6 +10,15 @@
 ###Introduction
 Team "Blackcurrant" implement game "Cross the River" 
 
+###Description
+The goal is to get all eight people across the river. 
+You must respect the following rules:
+-	Only two people can be on the raft at one time.
+-	Only the mother, father & officer can operate the raft.
+-	The mother cannot be left with the sons without the father (or she’ll beat them).
+-	The father cannot be left with the daughters without the mother (or he’ll beat them).
+-	The thief cannot be left with anyone without the officer (or there will be even more beatdowns).
+
 ###Team Members
 | Name              | Academy Username      	|
 |-------------------|-------------------|
