@@ -1,0 +1,289 @@
+<!doctype html>
+<html> 
+  <head> 
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Raft</title>    
+    <script type="text/javascript" src="raphael-min.js"></script>    
+  </head>
+  <body>
+  
+	<!-- the html element where to put the paper -->  
+	<div id="paper"></div>
+	
+	<script type="text/javascript">
+	
+	window.onload = (function() {  
+	
+	var paper = Raphael("paper",1000,500);
+	
+	var bgRaphael = paper.rect(0,0,1000,500).attr({"fill": "lightgreen"});
+	
+	var river = paper.path("M0,0L0,120L450,500L900,500L400,0Z")
+	.attr({"stroke-width": 0, fill: "skyblue"});
+	
+	var raft = paper.path("M205,270L134,210L264,210L325,270LZ")
+	.attr({"stroke-width": 1, fill: "gray"}); 
+	
+	var officerVisible = paper.circle(250,450,20).attr({
+	fill: "blue",  
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	});
+	
+	var prisonerVisible = paper.circle(310,450,20).attr({
+	fill: "black", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	});
+	
+	var fatherVisible = paper.circle(260,370,20).attr({
+	fill: "green", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	});
+	
+	var smallBoyVisible=paper.circle(210,330,12).attr({
+	fill: "yellowgreen", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}); 
+	
+	var bigBoyVisible=paper.circle(160,290,12).attr({
+	fill: "yellowgreen", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}); 
+	
+	var motherVisible=paper.circle(90,290,20).attr({
+	fill: "red", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	});
+	
+	var smallGirlVisible=paper.circle(80,250,12).attr({
+	fill: "purple", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}); 
+	
+	var bigGirlVisible=paper.circle(50,230,12).attr({
+	fill: "purple", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}); 
+	
+	var buttonToRight =paper.circle(380,480,10).attr({
+	fill: "gray", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	});
+	
+	var buttonToLeft = paper.circle(900,480,10).attr({
+	fill: "gray", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	});
+	
+	var officerFace = paper.circle(800,280,20).attr({
+	fill: "blue",  
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide();
+	
+	var prisonerFace = paper.circle(750,280,20).attr({  
+	fill: "black", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide();
+	
+	var fatherFace = paper.circle(750,200,20).attr({
+	fill: "green", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide();
+	
+	var smallBoyFace=paper.circle(695,200,12).attr({
+	fill: "yellowgreen", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide(); 
+	
+	var bigBoyFace=paper.circle(660,200,12).attr({
+	fill: "yellowgreen", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide(); 
+	
+	var motherFace=paper.circle(700,120,20).attr({
+	fill: "red", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide();
+	
+	var smallGirlFace=paper.circle(645,120,12).attr({
+	fill: "purple", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide(); 
+	
+	var bigGirlFace=paper.circle(615,120,12).attr({
+	fill: "purple", 
+	stroke: "rgb(200,100,77)", 
+	"stroke-width": 1, 
+	}).hide();  
+	
+	var raftWithPeople = paper.set();
+	
+	raftWithPeople.push(raft);
+	
+	buttonToRight.click(function(){
+		raftWithPeople.animate({transform: "t330,0"}, 5000);
+	}); 
+	
+	buttonToLeft.click(function(){ 
+		raftWithPeople.animate({transform: "t0,0"}, 5000);
+	});
+	
+	var officerHidden = paper.circle(250,215,20).attr({
+	fill: "blue",  
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide();
+	
+	var prisonerHidden = paper.circle(250,235,20).attr({
+	fill: "black", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide();
+	
+	var fatherHidden = paper.circle(260,235,20).attr({
+			fill: "green", 
+			stroke: "rgb(200,100,77)",
+			"stroke-width": 1,
+	}).hide();
+	
+	var smallBoyHidden=paper.circle(250,215,12).attr({
+	fill: "yellowgreen", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide(); 
+	
+	var bigBoyHidden=paper.circle(250,235,12).attr({
+	fill: "yellowgreen", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide(); 
+	
+	var motherHidden=paper.circle(250,215,20).attr({
+	fill: "red", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide();
+	
+	var smallGirlHidden=paper.circle(260,220,12).attr({
+	fill: "purple", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide(); 
+	
+	var bigGirlHidden=paper.circle(240,220,12).attr({
+	fill: "purple", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide();   
+	
+	raftWithPeople.push(officerHidden);
+	raftWithPeople.push(prisonerHidden);
+	raftWithPeople.push(fatherHidden);
+	raftWithPeople.push(smallBoyHidden);
+	raftWithPeople.push(bigBoyHidden);
+	raftWithPeople.push(motherHidden);
+	raftWithPeople.push(smallGirlHidden);
+	raftWithPeople.push(bigGirlHidden);
+	
+		officerVisible.click(function(){
+			this.hide();
+			officerHidden.show();
+		});
+		
+		officerHidden.click(function(){
+			this.hide();
+			officerVisible.show();
+		});
+	
+	prisonerVisible.click(function(){
+		this.hide();
+		prisonerHidden.show();
+	});
+	
+	prisonerHidden.click(function(){
+		this.hide();
+		prisonerVisible.show();
+	});
+	
+	fatherVisible.click(function(){
+		this.hide();
+		fatherHidden.show();
+	});
+	
+	fatherHidden.click(function(){
+		this.hide();
+		fatherVisible.show();
+	});
+	
+	smallBoyVisible.click(function(){
+		this.hide();
+		smallBoyHidden.show();
+	});
+	
+	smallBoyHidden.click(function(){
+		this.hide();
+		smallBoyVisible.show();
+	});
+	
+	bigBoyVisible.click(function(){
+		this.hide();
+		bigBoyHidden.show();
+	});
+	
+	bigBoyHidden.click(function(){
+		this.hide();
+		bigBoyVisible.show();
+	});
+	
+	motherVisible.click(function(){
+		this.hide();
+		motherHidden.show();
+	});
+	
+	motherHidden.click(function(){
+		this.hide();
+		motherVisible.show();
+	});
+	
+	smallGirlVisible.click(function(){
+		this.hide();
+		smallGirlHidden.show();
+	});
+	
+	smallGirlHidden.click(function(){
+		this.hide();
+		smallGirlVisible.show();
+	});
+	
+	bigGirlVisible.click(function(){
+		this.hide();
+		bigGirlHidden.show();
+	});
+	
+	bigGirlHidden.click(function(){
+		this.hide();
+		bigGirlVisible.show();
+	});
+	
+	}());
+
+	</script>
+	
+  </body>
+</html>
