@@ -12,6 +12,9 @@ var game = (function () {
             this.daughter = Object.create(daughter).init(195, 50, 25);
             this.cop = Object.create(cop).init(290, 50, 25);
             this.prisoner = Object.create(prisoner).init(350, 50, 25);
+            this.raft = Object.create(raft).init(150, 450, 25);
+            this.tree = Object.create(tree).init(250, 450, 25);
+            this.river = Object.create(river).init(350, 450, 25);
             return this;
         }
     });
@@ -23,7 +26,10 @@ var game = (function () {
                 drawSon: renderer.drawSon(this.renderer, this.son),
                 drawDaughter: renderer.drawDaughter(this.renderer, this.daughter),
                 drawCop: renderer.drawCop(this.renderer, this.cop),
-                drawPrisoner: renderer.drawPrisoner(this.renderer, this.prisoner)
+                drawPrisoner: renderer.drawPrisoner(this.renderer, this.prisoner),
+                drawRiver: renderer.drawRiver(this.renderer, this.river),
+                drawRaft: renderer.drawRaft(this.renderer, this.raft),
+                drawTree: renderer.drawTree(this.renderer, this.tree)
             }
            return this;
         }

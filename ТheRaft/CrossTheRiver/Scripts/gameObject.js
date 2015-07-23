@@ -1,7 +1,6 @@
-
-	var person = (function(){
-	person = Object.create({});
-	Object.defineProperty(person,'init',{
+var gameObject = (function(){
+	gameObject = Object.create({});
+	Object.defineProperty(gameObject,'init',{
 		value: function(x, y, size){
 			this.x = x;
 			this.y = y;
@@ -9,7 +8,7 @@
 			return this;
 		}
 	});
-	Object.defineProperty(person,'x',{
+	Object.defineProperty(gameObject,'x',{
 		get:function(){
 			return this._x;
 		},
@@ -19,7 +18,7 @@
 			this._x = value;
 		}
 	});
-	Object.defineProperty(person,'y',{
+	Object.defineProperty(gameObject,'y',{
 		get: function(){
 			return this._y;
 		},
@@ -29,7 +28,7 @@
 			this._y = value;
 		}
 	});
-	Object.defineProperty(person,'size',{
+	Object.defineProperty(gameObject,'size',{
 		get:function(){
 			return this._size;
 		},
@@ -38,7 +37,7 @@
 			this._size = value;
 		}
 	});
-	Object.defineProperty(person,'getPosition',{
+	Object.defineProperty(gameObject,'getPosition',{
 		value: function(){
 			return {
 				x: this.x,
@@ -46,7 +45,5 @@
 			}
 		}
 	});
-	return person;
+	return gameObject;
 }())
-
-
