@@ -2,288 +2,821 @@
 <html> 
   <head> 
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>Raft</title>    
-    <script type="text/javascript" src="raphael-min.js"></script>    
+    <title>Raft</title> 
+	<script src="kinetic-v5.1.0.js"></script>	
   </head>
   <body>
   
-	<!-- the html element where to put the paper -->  
-	<div id="paper"></div>
-	
-	<script type="text/javascript">
-	
-	window.onload = (function() {  
-	
-	var paper = Raphael("paper",1000,500);
-	
-	var bgRaphael = paper.rect(0,0,1000,500).attr({"fill": "lightgreen"});
-	
-	var river = paper.path("M0,0L0,120L450,500L900,500L400,0Z")
-	.attr({"stroke-width": 0, fill: "skyblue"});
-	
-	var raft = paper.path("M205,270L134,210L264,210L325,270LZ")
-	.attr({"stroke-width": 1, fill: "gray"}); 
-	
-	var officerVisible = paper.circle(250,450,20).attr({
-	fill: "blue",  
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	});
-	
-	var prisonerVisible = paper.circle(310,450,20).attr({
-	fill: "black", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	});
-	
-	var fatherVisible = paper.circle(260,370,20).attr({
-	fill: "green", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	});
-	
-	var smallBoyVisible=paper.circle(210,330,12).attr({
-	fill: "yellowgreen", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	}); 
-	
-	var bigBoyVisible=paper.circle(160,290,12).attr({
-	fill: "yellowgreen", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	}); 
-	
-	var motherVisible=paper.circle(90,290,20).attr({
-	fill: "red", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	});
-	
-	var smallGirlVisible=paper.circle(80,250,12).attr({
-	fill: "purple", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	}); 
-	
-	var bigGirlVisible=paper.circle(50,230,12).attr({
-	fill: "purple", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	}); 
-	
-	var buttonToRight =paper.circle(380,480,10).attr({
-	fill: "gray", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	});
-	
-	var buttonToLeft = paper.circle(900,480,10).attr({
-	fill: "gray", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	});
-	
-	var officerFace = paper.circle(800,280,20).attr({
-	fill: "blue",  
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	}).hide();
-	
-	var prisonerFace = paper.circle(750,280,20).attr({  
-	fill: "black", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	}).hide();
-	
-	var fatherFace = paper.circle(750,200,20).attr({
-	fill: "green", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	}).hide();
-	
-	var smallBoyFace=paper.circle(695,200,12).attr({
-	fill: "yellowgreen", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	}).hide(); 
-	
-	var bigBoyFace=paper.circle(660,200,12).attr({
-	fill: "yellowgreen", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	}).hide(); 
-	
-	var motherFace=paper.circle(700,120,20).attr({
-	fill: "red", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	}).hide();
-	
-	var smallGirlFace=paper.circle(645,120,12).attr({
-	fill: "purple", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	}).hide(); 
-	
-	var bigGirlFace=paper.circle(615,120,12).attr({
-	fill: "purple", 
-	stroke: "rgb(200,100,77)", 
-	"stroke-width": 1, 
-	}).hide();  
-	
-	var raftWithPeople = paper.set();
-	
-	raftWithPeople.push(raft);
-	
-	buttonToRight.click(function(){
-		raftWithPeople.animate({transform: "t330,0"}, 5000);
-	}); 
-	
-	buttonToLeft.click(function(){ 
-		raftWithPeople.animate({transform: "t0,0"}, 5000);
-	});
-	
-	var officerHidden = paper.circle(250,215,20).attr({
-	fill: "blue",  
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	}).hide();
-	
-	var prisonerHidden = paper.circle(250,235,20).attr({
-	fill: "black", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	}).hide();
-	
-	var fatherHidden = paper.circle(260,235,20).attr({
-			fill: "green", 
-			stroke: "rgb(200,100,77)",
-			"stroke-width": 1,
-	}).hide();
-	
-	var smallBoyHidden=paper.circle(250,215,12).attr({
-	fill: "yellowgreen", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	}).hide(); 
-	
-	var bigBoyHidden=paper.circle(250,235,12).attr({
-	fill: "yellowgreen", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	}).hide(); 
-	
-	var motherHidden=paper.circle(250,215,20).attr({
-	fill: "red", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	}).hide();
-	
-	var smallGirlHidden=paper.circle(260,220,12).attr({
-	fill: "purple", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	}).hide(); 
-	
-	var bigGirlHidden=paper.circle(240,220,12).attr({
-	fill: "purple", 
-	stroke: "rgb(200,100,77)",
-	"stroke-width": 1,
-	}).hide();   
-	
-	raftWithPeople.push(officerHidden);
-	raftWithPeople.push(prisonerHidden);
-	raftWithPeople.push(fatherHidden);
-	raftWithPeople.push(smallBoyHidden);
-	raftWithPeople.push(bigBoyHidden);
-	raftWithPeople.push(motherHidden);
-	raftWithPeople.push(smallGirlHidden);
-	raftWithPeople.push(bigGirlHidden);
-	
-		officerVisible.click(function(){
-			this.hide();
-			officerHidden.show();
-		});
+	<div id="container">
+	<script>
+(function() {
+  window.onload = function() {
+    var layer,
+		bgLayer,
+		bg,
+		river, 
+		raft, 
+		stage, 
+		buttonToLeft,
+		buttonToRight,
+		peopleLeft,
+		peopleRigth,
+		raftWithPeople,
+		peopleHiddenOnTheRaft,
+		officer,
+		prisoner,
+		father,
+		smallBoy,
+		bigBoy,
+		mother,
+		smallGirl,
+		bigGirl,
+		officerFace,
+		prisonerFace,
+		fatherFace,
+		smallBoyFace,
+		bigBoyFace,
+		motherFace,
+		smallGirlFace,
+		bigGirlFace,
+		officerHidden,
+		prisonerHidden,
+		fatherHidden,
+		smallBoyHidden,
+		bigBoyHidden,
+		motherHidden,
+		smallGirlHidden,
+		bigGirlHidden,
+		officerFaceHidden,
+		prisonerFaceHidden,
+		fatherFaceHidden,
+		smallBoyFaceHidden,
+		bigBoyFaceHidden,
+		motherFaceHidden,
+		smallGirlFaceHidden,
+		bigGirlFaceHidden;
 		
-		officerHidden.click(function(){
-			this.hide();
-			officerVisible.show();
-		});
+    stage = new Kinetic.Stage({
+      container: 'container',
+      width: 1000,
+      height: 500
+    });
 	
-	prisonerVisible.click(function(){
-		this.hide();
-		prisonerHidden.show();
-	});
+   layer = new Kinetic.Layer();
+	bgLayer =new Kinetic.Layer();
+	raftWithPeople = new Kinetic.Group();
 	
-	prisonerHidden.click(function(){
-		this.hide();
-		prisonerVisible.show();
-	});
+    bg = new Kinetic.Rect({
+      x: 0,
+      y: 0,
+      width:1000,
+      height: 500,
+      fill: "lightgreen",
+      stroke: 'lightgreen'
+    });
 	
-	fatherVisible.click(function(){
-		this.hide();
-		fatherHidden.show();
-	});
+      river = new Kinetic.Line({
+        points: [1,1,1,120,450,499,900,499,400,1],
+		closed:true,
+        fill: "skyblue",
+		stroke: 'skyblue'
+      });
+
+	    raft = new Kinetic.Line({
+      points: [205,270,134,210,264,210,325,270,205,270],
+	  closed:true,
+      fill: "gray",
+      stroke: 'gray'
+    });
+	 /*raftWithPeople = new Kinetic.Group({
+			x: 134,
+			y: 210,
+			offset:[x + 80/2,y + 60/2],
+			draggable: true
+		});*/
+	  
+	  buttonToRight = new Kinetic.Circle({
+      x: 380,
+      y: 480,
+      radius: 10,
+      fill: 'gray',
+      stroke: 'blue',
+      strokeWidth: 1
+    });
 	
-	fatherHidden.click(function(){
-		this.hide();
-		fatherVisible.show();
-	});
+	  buttonToLeft
+	  = new Kinetic.Circle({
+      x: 900,
+      y: 480,
+      radius: 10,
+      fill: 'gray',
+      stroke: 'blue',
+      strokeWidth: 1
+    });
+	  officer = new Kinetic.Circle({
+      x: 250,
+      y: 450,
+      radius: 20,
+      fill: 'blue',
+      stroke: 'blue',
+      strokeWidth: 1,
+	  visible:true
+    });
+	  prisoner = new Kinetic.Circle({
+      x: 310,
+      y: 450,
+      radius: 20,
+      fill: 'black',
+      stroke: 'blue',
+      strokeWidth: 1,
+	   visible:true
+    });
+	  father = new Kinetic.Circle({
+      x: 260,
+      y: 370,
+      radius: 20,
+      fill: 'green',
+      stroke: 'blue',
+      strokeWidth: 1,
+	   visible:true
+    });
+	  smallBoy = new Kinetic.Circle({
+      x: 210,
+      y: 330,
+      radius: 12,
+      fill: 'yellowgreen',
+      stroke: 'blue',
+      strokeWidth: 1,
+	   visible:true
+    });
+	  bigBoy = new Kinetic.Circle({
+      x: 160,
+      y: 290,
+      radius: 12,
+      fill: 'yellowgreen',
+      stroke: 'blue',
+      strokeWidth: 1,
+	   visible:true
+    });
+		mother = new Kinetic.Circle({
+      x: 90,
+      y: 290,
+      radius: 20,
+      fill: 'red',
+      stroke: 'blue',
+      strokeWidth: 1,
+	   visible:true
+    });
+	  smallGirl = new Kinetic.Circle({
+      x: 80,
+      y: 250,
+      radius: 12,
+      fill: 'pink',
+      stroke: 'blue',
+      strokeWidth: 1,
+	   visible:true
+    });
+	  bigGirl = new Kinetic.Circle({
+      x: 50,
+      y: 230,
+      radius: 12,
+      fill: 'pink',
+      stroke: 'blue',
+      strokeWidth: 1,
+	   visible:true
+    });
+	officerFace = new Kinetic.Circle({
+      x: 800,
+      y: 280,
+      radius: 20,
+      fill: 'blue',
+      stroke: 'blue',
+      strokeWidth: 4,
+	  visible:false
+    });
+	  prisonerFace = new Kinetic.Circle({
+      x: 750,
+      y: 280,
+      radius: 20,
+      fill: 'black',
+      stroke: 'blue',
+      strokeWidth: 4,
+	  visible:false
+    });
+	  fatherFace = new Kinetic.Circle({
+      x: 750,
+      y: 200,
+      radius: 20,
+      fill: 'green',
+      stroke: 'blue',
+      strokeWidth: 4,
+	  visible:false
+    });
+	  smallBoyFace = new Kinetic.Circle({
+      x: 695,
+      y: 200,
+      radius: 12,
+      fill: 'yellowgreen',
+      stroke: 'blue',
+      strokeWidth: 4,
+	  visible:false
+    });
+	  bigBoyFace = new Kinetic.Circle({
+      x: 660,
+      y: 200,
+      radius: 12,
+      fill: 'yellowgreen',
+      stroke: 'blue',
+      strokeWidth: 4,
+	  visible:false
+    });
+		motherFace = new Kinetic.Circle({
+      x: 700,
+      y: 120,
+      radius: 20,
+      fill: 'red',
+      stroke: 'blue',
+      strokeWidth: 4,
+	  visible:false
+    });
+	  smallGirlFace = new Kinetic.Circle({
+      x: 645,
+      y: 120,
+      radius: 12,
+      fill: 'pink',
+      stroke: 'blue',
+      strokeWidth: 4,
+	  visible:false
+    });
+	  bigGirlFace = new Kinetic.Circle({
+      x: 615,
+      y: 120,
+      radius: 12,
+      fill: 'pink',
+      stroke: 'blue',
+      strokeWidth: 4,
+	  visible:false
+    });
 	
-	smallBoyVisible.click(function(){
-		this.hide();
-		smallBoyHidden.show();
-	});
+	officerHidden = new Kinetic.Circle({
+      x: 250,
+      y: 215,
+      radius: 20,
+      fill: 'blue',
+      stroke: 'blue',
+      strokeWidth: 1,
+	  visible:false
+    }); 
+	  prisonerHidden = new Kinetic.Circle({
+      x: 250,
+      y: 240,
+      radius: 20,
+      fill: 'black',
+      stroke: 'blue',
+      strokeWidth: 1,
+	  visible:false
+    });
+	  fatherHidden = new Kinetic.Circle({
+      x: 220,
+      y: 235,
+      radius: 20,
+      fill: 'green',
+      stroke: 'blue',
+      strokeWidth: 1,
+	  visible:false
+    });
+	  smallBoyHidden = new Kinetic.Circle({
+      x: 210,
+      y: 235,
+      radius: 12,
+      fill: 'yellowgreen',
+      stroke: 'blue',
+      strokeWidth: 1,
+	  visible:false
+    });
+	  bigBoyHidden = new Kinetic.Circle({
+      x: 240,
+      y: 220,
+      radius: 12,
+      fill: 'yellowgreen',
+      stroke: 'blue',
+      strokeWidth: 1,
+	  visible:false
+    });
+		motherHidden = new Kinetic.Circle({
+      x:225,
+      y: 205,
+      radius: 20,
+      fill: 'red',
+      stroke: 'blue',
+      strokeWidth: 1,
+	  visible:false
+    });
+	  smallGirlHidden = new Kinetic.Circle({
+      x:260,
+      y: 250,
+      radius: 12,
+      fill: 'pink',
+      stroke: 'blue',
+      strokeWidth: 1,
+	  visible:false
+    });
+	  bigGirlHidden = new Kinetic.Circle({
+      x: 260,
+      y: 230,
+      radius: 12,
+      fill: 'pink',
+      stroke: 'blue',
+      strokeWidth: 1,
+	  visible:false
+    });
+	officerFaceHidden = new Kinetic.Circle({
+      x: 580,
+      y: 220,
+      radius: 20,
+      fill: 'blue',
+      stroke: 'blue',
+      strokeWidth: 4,
+	  visible:false
+    });
+	  prisonerFaceHidden = new Kinetic.Circle({
+      x: 570,
+      y: 235,
+      radius: 20,
+      fill: 'black',
+      stroke: 'blue',
+      strokeWidth: 4,
+	  visible:false
+    });
+	  fatherFaceHidden = new Kinetic.Circle({
+      x: 590,
+      y: 220,
+      radius: 20,
+      fill: 'green',
+      stroke: 'blue',
+      strokeWidth: 4,
+	  visible:false
+    });
+	  smallBoyFaceHidden = new Kinetic.Circle({
+      x: 560,
+      y: 220,
+      radius: 12,
+      fill: 'yellowgreen',
+      stroke: 'blue',
+      strokeWidth: 4,
+	  visible:false
+    });
+	  bigBoyFaceHidden = new Kinetic.Circle({
+      x: 570,
+      y: 230,
+      radius: 12,
+      fill: 'yellowgreen',
+      stroke: 'blue',
+      strokeWidth: 4
+    }).hide();
+		motherFaceHidden = new Kinetic.Circle({
+      x:580,
+      y: 215,
+      radius: 20,
+      fill: 'red',
+      stroke: 'blue',
+      strokeWidth: 4,
+	  visible:false
+    });
+	  smallGirlFaceHidden = new Kinetic.Circle({
+      x: 560,
+      y: 220,
+      radius: 12,
+      fill: 'pink',
+      stroke: 'blue',
+      strokeWidth: 4,
+	  visible:false
+    });
+	  bigGirlFaceHidden = new Kinetic.Circle({
+      x: 670,
+      y: 230,
+      radius: 12,
+      fill: 'pink',
+      stroke: 'blue',
+      strokeWidth: 4,
+	   visible:false
+    });
 	
-	smallBoyHidden.click(function(){
-		this.hide();
-		smallBoyVisible.show();
-	});
 	
-	bigBoyVisible.click(function(){
-		this.hide();
-		bigBoyHidden.show();
-	});
+	peopleLeft=[];
+	peopleLeft.push(officer);
+	peopleLeft.push(prisoner);
+	peopleLeft.push(father);
+	peopleLeft.push(smallBoy);
+	peopleLeft.push(bigBoy);
+	peopleLeft.push(mother);
+	peopleLeft.push(smallGirl);
+	peopleLeft.push(bigGirl);
 	
-	bigBoyHidden.click(function(){
-		this.hide();
-		bigBoyVisible.show();
-	});
+	peopleRight=[]; 
+	raftWithPeople=[];
+	peopleHiddenOnTheRaft=[];
 	
-	motherVisible.click(function(){
-		this.hide();
-		motherHidden.show();
-	});
+	bgLayer.add(bg);
+	bgLayer.add(river);
+    layer.add(raft);
+	stage.add(bgLayer);
+    layer.add(buttonToLeft);
+    layer.add(buttonToRight);
+	layer.add(officer);
+    layer.add(prisoner);
+    layer.add(father);
+	layer.add(smallBoy);
+	layer.add(bigBoy);
+    layer.add(mother);
+    layer.add(smallGirl);
+    layer.add(bigGirl);
+	layer.add(officerFace);
+    layer.add(prisonerFace);
+    layer.add(fatherFace);
+	layer.add(smallBoyFace);
+	layer.add(bigBoyFace);
+    layer.add(motherFace);
+    layer.add(smallGirlFace);
+    layer.add(bigGirlFace);
+	layer.add(officerHidden);
+    layer.add(prisonerHidden);
+    layer.add(fatherHidden);
+	layer.add(smallBoyHidden);
+	layer.add(bigBoyHidden);
+    layer.add(motherHidden);
+    layer.add(smallGirlHidden);
+    layer.add(bigGirlHidden);
+	layer.add(officerFaceHidden);
+    layer.add(prisonerFaceHidden);
+    layer.add(fatherFaceHidden);
+	layer.add(smallBoyFaceHidden);
+	layer.add(bigBoyFaceHidden);
+    layer.add(motherFaceHidden);
+    layer.add(smallGirlFaceHidden);
+    layer.add(bigGirlFaceHidden);
+	stage.add(layer);
 	
-	motherHidden.click(function(){
-		this.hide();
-		motherVisible.show();
-	});
+	 /*group.add(yellowCircle);
+        group.add(greenCircle);
+        group.add(orangeCircle);
+        group.add(redCircle);
+        group.add(blueCircle);
+        layer.add(raftWithPeople);*/
 	
-	smallGirlVisible.click(function(){
-		this.hide();
-		smallGirlHidden.show();
-	});
+	officer.on('click', function (evt) { 
+	officer.hide();
+	peopleHiddenOnTheRaft.push(officerHidden); 
+	peopleRight.push(officerFace);
+	officerHidden.show();
+	peopleLeft.splice(peopleLeft.indexOf(officer),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
 	
-	smallGirlHidden.click(function(){
-		this.hide();
-		smallGirlVisible.show();
-	});
+	prisoner.on('click', function (evt) { 
+	prisoner.hide();
+	peopleHiddenOnTheRaft.push(prisonerHidden); 
+	peopleRight.push(prisonerFace);
+	prisonerHidden.show();
+	peopleLeft.splice(peopleLeft.indexOf(prisoner),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
 	
-	bigGirlVisible.click(function(){
-		this.hide();
-		bigGirlHidden.show();
-	});
+	father.on('click', function (evt) { 
+	father.hide();
+	peopleHiddenOnTheRaft.push(fatherHidden); 
+	peopleRight.push(fatherFace);
+	fatherHidden.show();
+	peopleLeft.splice(peopleLeft.indexOf(father),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
 	
-	bigGirlHidden.click(function(){
-		this.hide();
-		bigGirlVisible.show();
-	});
+	smallBoy.on('click', function (evt) { 
+	smallBoy.hide();
+	peopleHiddenOnTheRaft.push(smallBoyHidden); 
+	peopleRight.push(smallBoyFace);
+	smallBoyHidden.show();
+	peopleLeft.splice(peopleLeft.indexOf(smallBoy),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
 	
-	}());
+	bigBoy.on('click', function (evt) { 
+	bigBoy.hide();
+	peopleHiddenOnTheRaft.push(bigBoyHidden); 
+	peopleRight.push(bigBoyFace);
+	bigBoyHidden.show();
+	peopleLeft.splice(peopleLeft.indexOf(bigBoy),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	mother.on('click', function (evt) { 
+	mother.hide();
+	peopleHiddenOnTheRaft.push(motherHidden); 
+	peopleRight.push(motherFace);
+	motherHidden.show();
+	peopleLeft.splice(peopleLeft.indexOf(mother),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	smallGirl.on('click', function (evt) { 
+	smallGirl.hide();
+	peopleHiddenOnTheRaft.push(smallGirlHidden); 
+	peopleRight.push(smallGirlFace);
+	smallGirlHidden.show();
+	peopleLeft.splice(peopleLeft.indexOf(smallGirl),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	bigGirl.on('click', function (evt) { 
+	bigGirl.hide();
+	peopleHiddenOnTheRaft.push(bigGirlHidden); 
+	peopleRight.push(bigGirlFace);
+	bigGirlHidden.show();
+	peopleLeft.splice(peopleLeft.indexOf(bigGirl),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	officerHidden.on('click', function (evt) { 
+	officerHidden.hide();
+	peopleHiddenOnTheRaft
+	.splice(peopleHiddenOnTheRaft.indexOf(officerHidden),1); 
+	officer.show();
+	peopleLeft.push(officer);
+	peopleRight.splice(peopleRight.indexOf(officerFace),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	prisonerHidden.on('click', function (evt) { 
+	prisonerHidden.hide();
+	peopleHiddenOnTheRaft
+	.splice(peopleHiddenOnTheRaft.indexOf(prisonerHidden),1); 
+	prisoner.show();
+	peopleLeft.push(prisoner);
+	peopleRight.splice(peopleRight.indexOf(prisonerFace),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	fatherHidden.on('click', function (evt) { 
+	fatherHidden.hide();
+	peopleHiddenOnTheRaft
+	.splice(peopleHiddenOnTheRaft.indexOf(fatherHidden),1); 
+	father.show();
+	peopleLeft.push(father);
+	peopleRight.splice(peopleRight.indexOf(fatherFace),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	smallBoyHidden.on('click', function (evt) { 
+	smallBoyHidden.hide();
+	peopleHiddenOnTheRaft
+	.splice(peopleHiddenOnTheRaft.indexOf(smallBoyHidden),1); 
+	smallBoy.show();
+	peopleLeft.push(smallBoy);
+	peopleRight.splice(peopleRight.indexOf(smallBoyFace),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	bigBoyHidden.on('click', function (evt) { 
+	bigBoyHidden.hide();
+	peopleHiddenOnTheRaft
+	.splice(peopleHiddenOnTheRaft.indexOf(bigBoyHidden),1); 
+	bigBoy.show();
+	peopleLeft.push(bigBoy);
+	peopleRight.splice(peopleRight.indexOf(bigBoyFace),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	motherHidden.on('click', function (evt) { 
+	motherHidden.hide();
+	peopleHiddenOnTheRaft
+	.splice(peopleHiddenOnTheRaft.indexOf(motherHidden),1); 
+	mother.show();
+	peopleLeft.push(mother);
+	peopleRight.splice(peopleRight.indexOf(mother),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	smallGirlHidden.on('click', function (evt) { 
+	smallGirlHidden.hide();
+	peopleHiddenOnTheRaft
+	.splice(peopleHiddenOnTheRaft.indexOf(smallGirlHidden),1); 
+	smallGirl.show();
+	peopleLeft.push(smallGirl);
+	peopleRight.splice(peopleRight.indexOf(smallGirlFace),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	bigGirlHidden.on('click', function (evt) { 
+	bigGirlHidden.hide();
+	peopleHiddenOnTheRaft
+	.splice(peopleHiddenOnTheRaft.indexOf(bigGirlHidden),1); 
+	bigGirl.show();
+	peopleLeft.push(bigGirl);
+	peopleRight.splice(peopleRight.indexOf(bigGirlFace),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	officerFace.on('click', function (evt) { 
+	officerFace.hide();
+	peopleHiddenOnTheRaft.push(officerFaceHidden); 
+	officerFaceHidden.show();
+	peopleLeft.push(officer);
+	peopleRight.splice(peopleRight.indexOf(officerFace),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	prisonerFace.on('click', function (evt) { 
+	prisonerFace.hide();
+	peopleHiddenOnTheRaft.push(prisonerFaceHidden); 
+	prisonerFaceHidden.show();
+	peopleLeft.push(prisoner);
+	peopleRight.splice(peopleRight.indexOf(prisonerFace),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	fatherFace.on('click', function (evt) { 
+	fatherFace.hide();
+	peopleHiddenOnTheRaft.push(fatherFaceHidden); 
+	fatherFaceHidden.show();
+	peopleLeft.push(father);
+	peopleRight.splice(peopleRight.indexOf(fatherFace),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	smallBoyFace.on('click', function (evt) { 
+	smallBoyFace.hide();
+	peopleHiddenOnTheRaft.push(smallBoyFaceHidden); 
+	smallBoyFaceHidden.show();
+	peopleLeft.push(smallBoy);
+	peopleRight.splice(peopleRight.indexOf(smallBoyFace),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	bigBoyFace.on('click', function (evt) { 
+	bigBoyFace.hide();
+	peopleHiddenOnTheRaft.push(bigBoyFaceHidden); 
+	bigBoyFaceHidden.show();
+	peopleLeft.push(bigBoy);
+	peopleRight.splice(peopleRight.indexOf(bigBoyFace),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	motherFace.on('click', function (evt) { 
+	motherFace.hide();
+	peopleHiddenOnTheRaft.push(motherFaceHidden); 
+	motherFaceHidden.show();
+	peopleLeft.push(mother);
+	peopleRight.splice(peopleRight.indexOf(motherFace),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	smallGirlFace.on('click', function (evt) { 
+	smallGirlFace.hide();
+	peopleHiddenOnTheRaft.push(smallGirlFaceHidden); 
+	smallGirlFaceHidden.show();
+	peopleLeft.push(smallGirl);
+	peopleRight.splice(peopleRight.indexOf(smallGirlFace),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	bigGirlFace.on('click', function (evt) { 
+	bigGirlFace.hide();
+	peopleHiddenOnTheRaft.push(bigGirlFaceHidden); 
+	bigGirlFaceHidden.show();
+	peopleLeft.push(bigGirl);
+	peopleRight.splice(peopleRight.indexOf(bigGirlFace),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	officerFaceHidden.on('click', function (evt) { 
+	officerFaceHidden.hide();
+	peopleHiddenOnTheRaft
+	.splice(peopleHiddenOnTheRaft.indexOf(officerFaceHidden),1); 
+	officerFace.show();
+	peopleRight.push(officerFace);
+	peopleLeft.splice(peopleLeft.indexOf(officer),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	prisonerFaceHidden.on('click', function (evt) { 
+	prisonerFaceHidden.hide();
+	peopleHiddenOnTheRaft
+	.splice(peopleHiddenOnTheRaft.indexOf(prisonerFaceHidden),1); 
+	officerFace.show();
+	peopleRight.push(prisonerFace);
+	peopleLeft.splice(peopleLeft.indexOf(prisoner),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	fatherFaceHidden.on('click', function (evt) { 
+	fatherFaceHidden.hide();
+	peopleHiddenOnTheRaft
+	.splice(peopleHiddenOnTheRaft.indexOf(fatherFaceHidden),1); 
+	fatherFace.show();
+	peopleRight.push(fatherFace);
+	peopleLeft.splice(peopleLeft.indexOf(father),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	smallBoyFaceHidden.on('click', function (evt) { 
+	smallBoyFaceHidden.hide();
+	peopleHiddenOnTheRaft
+	.splice(peopleHiddenOnTheRaft.indexOf(smallBoyFaceHidden),1); 
+	smallBoyFace.show();
+	peopleRight.push(smallBoyFace);
+	peopleLeft.splice(peopleLeft.indexOf(smallBoy),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	bigBoyFaceHidden.on('click', function (evt) { 
+	bigBoyFaceHidden.hide();
+	peopleHiddenOnTheRaft
+	.splice(peopleHiddenOnTheRaft.indexOf(bigBoyFaceHidden),1); 
+	bigBoyFace.show();
+	peopleRight.push(bigBoyFace);
+	peopleLeft.splice(peopleLeft.indexOf(bigBoy),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	motherFaceHidden.on('click', function (evt) { 
+	motherFaceHidden.hide();
+	peopleHiddenOnTheRaft
+	.splice(peopleHiddenOnTheRaft.indexOf(motherFaceHidden),1); 
+	motherFace.show();
+	peopleRight.push(motherFace);
+	peopleLeft.splice(peopleLeft.indexOf(mother),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	smallGirlFaceHidden.on('click', function (evt) { 
+	smallGirlFaceHidden.hide();
+	peopleHiddenOnTheRaft
+	.splice(peopleHiddenOnTheRaft.indexOf(smallGirlFaceHidden),1); 
+	smallGirlFace.show();
+	peopleRight.push(smallGirlFace);
+	peopleLeft.splice(peopleLeft.indexOf(smallGirl),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	bigGirlFaceHidden.on('click', function (evt) { 
+	bigGirlFaceHidden.hide();
+	peopleHiddenOnTheRaft
+	.splice(peopleHiddenOnTheRaft.indexOf(bigGirlFaceHidden),1); 
+	bigGirlFace.show();
+	peopleRight.push(bigGirlFace);
+	peopleLeft.splice(peopleLeft.indexOf(bigGirl),1);
+	layer.draw();
+	evt.cancelBubble = true;
+	},false);
+	
+	  raft = new Kinetic.Line({
+      points: [205,270,134,210,264,210,325,270,205,270],
+	  closed:true,
+      fill: "gray",
+      stroke: 'gray'
+    });
+	
+
+		
+    return stage.add(layer);
+	
+  };
+
+}).call(this);
 
 	</script>
+	</div>
 	
-  </body>
-</html>
+	</body>
+	</html>
