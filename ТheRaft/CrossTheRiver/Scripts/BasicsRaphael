@@ -1,0 +1,521 @@
+<!doctype html>
+<html> 
+  <head> 
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Raft</title>    
+    <script type="text/javascript" src="raphael-min.js"></script>    
+  </head>
+  <body>
+  
+	<!-- the html element where to put the paper -->  
+	<div id="paper"></div>
+	
+	<script type="text/javascript">
+	
+	window.onload = (function() {  
+	var	river, 
+		raft, 
+		stage, 
+		buttonToLeft,
+		buttonToRight,
+		peopleLeft,
+		peopleRigth,
+		raftWithPeople,
+		peopleHiddenOnTheRaft,
+		officer,
+		prisoner,
+		father,
+		smallBoy,
+		bigBoy,
+		mother,
+		smallGirl,
+		bigGirl,
+		officerFace,
+		prisonerFace,
+		fatherFace,
+		smallBoyFace,
+		bigBoyFace,
+		motherFace,
+		smallGirlFace,
+		bigGirlFace,
+		officerHidden,
+		prisonerHidden,
+		fatherHidden,
+		smallBoyHidden,
+		bigBoyHidden,
+		motherHidden,
+		smallGirlHidden,
+		bigGirlHidden,
+		officerFaceHidden,
+		prisonerFaceHidden,
+		fatherFaceHidden,
+		smallBoyFaceHidden,
+		bigBoyFaceHidden,
+		motherFaceHidden,
+		smallGirlFaceHidden,
+		bigGirlFaceHidden,
+		counter=0,
+		counterFace=0;
+	
+	var paper = Raphael("paper",1000,500);
+	
+	var bgRaphael = paper.rect(0,0,1000,500).attr({"fill": "lightgreen"}); 
+
+	var raftWithPeople = paper.set();
+	
+	river = paper.path("M0,0L0,120L450,500L900,500L400,0Z")
+	.attr({"stroke-width": 0, fill: "skyblue"});
+	
+	raft = paper.path("M205,270L134,210L264,210L325,270LZ")
+	.attr({"stroke-width": 1, fill: "gray"}); 
+	
+	buttonToRight =paper.circle(380,480,10).attr({
+	fill: "gray", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	});  
+	
+	buttonToLeft = paper.circle(900,480,10).attr({
+	fill: "gray", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	});
+	
+	var raftWithPeople = paper.set();
+	
+	peopleLeft = paper.set();
+	peopleRight = paper.set();
+	peopleHiddenOnTheRaft = paper.set();
+	
+	officer = paper.circle(250,450,20).attr({
+	fill: "blue",  
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,});
+	
+	prisoner = paper.circle(310,450,20).attr({
+	fill: "black", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,});
+	
+	father = paper.circle(260,370,20).attr({
+	fill: "green", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,});
+	
+	smallBoy=paper.circle(210,330,12).attr({
+	fill: "yellowgreen", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	});
+	
+	bigBoy=paper.circle(160,290,12).attr({
+	fill: "yellowgreen", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	});
+	
+	mother=paper.circle(90,290,20).attr({
+	fill: "red", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	});
+	
+	smallGirl=paper.circle(80,250,12).attr({
+	fill: "purple", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	});
+	
+	bigGirl=paper.circle(50,230,12).attr({
+	fill: "purple", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	});
+	
+	officerFace = paper.circle(800,280,20).attr({
+	fill: "blue",  
+	stroke: "rgb(200,100,77)",
+	"stroke-width":4,
+	}).hide();
+	
+	prisonerFace = paper.circle(750,280,20).attr({  
+	fill: "black", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width":4,
+	}).hide();
+	
+	fatherFace = paper.circle(750,200,20).attr({
+	fill: "green", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 4,
+	}).hide();
+	
+	smallBoyFace=paper.circle(695,200,12).attr({
+	fill: "yellowgreen", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 4,
+	}).hide();
+	
+	bigBoyFace=paper.circle(660,200,12).attr({
+	fill: "yellowgreen", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 4,
+	}).hide();
+	
+	motherFace=paper.circle(700,120,20).attr({
+	fill: "red", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 4,
+	}).hide();
+	
+	var smallGirlFace=paper.circle(645,120,12).attr({
+	fill: "purple", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 4,
+	}).hide();
+	
+	bigGirlFace=paper.circle(615,120,12).attr({
+	fill: "purple", 
+	stroke: "rgb(200,100,77)", 
+	"stroke-width": 4, 
+	}).hide();
+	
+	officerHidden = paper.circle(250-counter*330,215,20).attr({
+	fill: "blue",  
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide();
+	
+	prisonerHidden = paper.circle(250-counter*330,235,20).attr({
+	fill: "black", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide();
+	
+	fatherHidden = paper.circle(260-counter*330,235,20).attr({
+	fill: "green", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide();
+	
+	smallBoyHidden=paper.circle(250-counter*330,215,12).attr({
+	fill: "yellowgreen", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide();
+	
+	bigBoyHidden=paper.circle(250-counter*330,235,12).attr({
+	fill: "yellowgreen", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide();
+	
+	motherHidden=paper.circle(250-counter*330,215,20).attr({
+	fill: "red", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide();
+	
+	smallGirlHidden=paper.circle(260-counter*330,220,12).attr({
+	fill: "purple", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide();
+	
+	bigGirlHidden=paper.circle(240-counter*330,220,12).attr({
+	fill: "purple", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 1,
+	}).hide();
+	
+	officerFaceHidden = paper.circle(580-counterFace*330,215,20).attr({
+	fill: "blue",  
+	stroke: "rgb(200,100,77)", 
+	"stroke-width": 4,
+	}).hide();
+	
+	prisonerFaceHidden = paper.circle(580-counterFace*330,235,20).attr({
+	fill: "black", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 4,
+	}).hide();
+	
+	fatherFaceHidden = paper.circle(590-counterFace*330,235,20).attr({
+	fill: "green", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 4,
+	}).hide();
+	
+	smallBoyFaceHidden=paper.circle(580-counterFace*330,215,12).attr({
+	fill: "yellowgreen", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 4,
+	}).hide();
+	
+	bigBoyFaceHidden=paper.circle(580-counterFace*330,235,12).attr({
+	fill: "yellowgreen", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 4,
+	}).hide();
+	
+	motherFaceHidden=paper.circle(570-counterFace*330,215,20).attr({
+	fill: "red", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 4,
+	}).hide();
+	
+	smallGirlFaceHidden=paper.circle(590-counterFace*330,220,12).attr({
+	fill: "purple", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width":4,
+	}).hide();
+	
+	bigGirlFaceHidden=paper.circle(570-counterFace*330,220,12).attr({
+	fill: "purple", 
+	stroke: "rgb(200,100,77)",
+	"stroke-width": 4,
+	}).hide();  
+	
+	
+	peopleLeft.push(officer);
+	peopleLeft.push(prisoner);
+	peopleLeft.push(father);
+	peopleLeft.push(smallBoy);
+	peopleLeft.push(bigBoy);
+	peopleLeft.push(mother);
+	peopleLeft.push(smallGirl);
+	peopleLeft.push(bigGirl);
+	
+	raftWithPeople.push(raft);
+	
+	raftWithPeople.push(peopleHiddenOnTheRaft);
+	
+	officer.click(function () { this.hide();
+	peopleLeft.exclude(officer);
+	peopleHiddenOnTheRaft.push(officerHidden); 
+	officerHidden.show();
+	peopleRight.push(officerFace);
+	});
+	
+	prisoner.click(function () { this.hide();  
+	peopleLeft.exclude(prisoner);
+	peopleHiddenOnTheRaft.push(prisonerHidden); 
+	prisonerHidden.show();
+	peopleRight.push(prisonerFace);});
+	
+	father.click(function () { this.hide();
+	peopleLeft.exclude(father);
+	peopleHiddenOnTheRaft.push(fatherHidden); 
+	fatherHidden.show();
+	peopleRight.push(fatherFace);});
+	
+	smallBoy.click(function () { this.hide();
+	peopleLeft.exclude(smallBoy);
+	peopleHiddenOnTheRaft.push(smallBoyHidden); 
+	smallBoyHidden.show();
+	peopleRight.push(smallBoyFace);});
+	
+	bigBoy.click(function () { this.hide();
+	peopleLeft.exclude(bigBoy);
+	peopleHiddenOnTheRaft.push(bigBoyHidden); 
+	bigBoyHidden.show();
+	peopleRight.push(bigBoyFace);});
+	
+	mother.click(function () { this.hide();
+	peopleLeft.exclude(mother);
+	peopleHiddenOnTheRaft.push(motherHidden); 
+	motherHidden.show();
+	peopleRight.push(motherFace);});
+	
+	smallGirl.click(function () { this.hide();
+	peopleLeft.exclude(smallGirl);
+	peopleHiddenOnTheRaft.push(smallGirlHidden); 
+	smallGirlHidden.show();
+	peopleRight.push(smallGirlFace);});
+	
+	bigGirl.click(function () { this.hide();
+	peopleLeft.exclude(bigGirl);
+	peopleHiddenOnTheRaft.push(bigGirlHidden); 
+	bigGirlHidden.show();
+	peopleRight.push(bigGirlFace);});
+	
+	officerFace.click(function () { this.hide();
+	peopleHiddenOnTheRaft.push(officerFaceHidden);
+	peopleRight.exclude(officerFace);
+	officerFaceHidden.show();
+	peopleHiddenOnTheRaft.exclude(officerHidden);
+	peopleLeft.push(officer);});
+	
+	prisonerFace.click(function () { this.hide();
+	peopleRight.exclude(prisonerFace);
+	peopleHiddenOnTheRaft.exclude(prisonerHidden);
+	peopleHiddenOnTheRaft.push(prisonerFaceHidden);
+	prisonerFaceHidden.show();
+	peopleLeft.push(prisoner);});
+	
+	fatherFace.click(function () { this.hide();
+	peopleRight.exclude(fatherFace);
+	peopleHiddenOnTheRaft.exclude(fatherHidden);
+	peopleHiddenOnTheRaft.push(fatherFaceHidden);
+	fatherFaceHidden.show();
+	peopleLeft.push(father);});
+	
+	smallBoyFace.click(function () { this.hide();
+	peopleRight.exclude(smallBoyFace);
+	peopleHiddenOnTheRaft.exclude(smallBoyHidden);
+	peopleHiddenOnTheRaft.push(smallBoyFaceHidden);
+	smallBoyFaceHidden.show();
+	peopleLeft.push(smallBoy);});
+	
+	bigBoyFace.click(function () { this.hide();
+	peopleRight.exclude(bigBoyFace);
+	peopleHiddenOnTheRaft.exclude(bigBoyHidden);
+	peopleHiddenOnTheRaft.push(bigBoyFaceHidden);
+	bigBoyFaceHidden.show();
+	peopleLeft.push(bigBoy);});
+	
+	motherFace.click(function () { this.hide();
+	peopleRight.exclude(motherFace);
+	peopleHiddenOnTheRaft.exclude(motherHidden);
+	peopleHiddenOnTheRaft.push(motherFaceHidden);
+	motherFaceHidden.show();
+	peopleLeft.push(mother);});
+	
+	smallGirlFace.click(function () { this.hide();
+	peopleRight.exclude(smallGirlFace);
+	peopleHiddenOnTheRaft.exclude(smallGirlHidden);
+	peopleHiddenOnTheRaft.push(smallGirlFaceHidden);
+	smallGirlFaceHidden.show();
+	peopleLeft.push(smallGirl);});
+	
+	bigGirlFace.click(function () { this.hide();
+	peopleRight.exclude(bigGirlFace);
+	peopleHiddenOnTheRaft.exclude(bigGirlHidden);
+	peopleHiddenOnTheRaft.push(bigGirlFaceHidden);
+	bigGirlFaceHidden.show();
+	peopleLeft.push(bigGirl);});  
+	
+	officerHidden.click(function () { this.hide();
+	peopleHiddenOnTheRaft.exclude(officerHidden); 
+	peopleLeft.push(officer);
+	officer.show();
+	peopleRight.exclude(officerFace);});
+	
+	prisonerHidden.click(function () { this.hide();
+	peopleHiddenOnTheRaft.exclude(prisonerHidden); 
+	prisoner.show();
+	peopleLeft.push(prisoner);
+	peopleRight.exclude(prisonerFace);});
+	
+	fatherHidden.click(function () { this.hide();
+	peopleHiddenOnTheRaft.exclude(fatherHidden); 
+	father.show();
+	peopleLeft.push(father);
+	peopleRight.exclude(fatherFace);});
+	
+	smallBoyHidden.click(function () { this.hide();
+	peopleHiddenOnTheRaft.exclude(smallBoyHidden); 
+	smallBoy.show();
+	peopleLeft.push(smallBoy);
+	peopleRight.exclude(smallBoyFace);});
+	
+	bigBoyHidden.click(function () { this.hide();
+	peopleHiddenOnTheRaft.exclude(bigBoyHidden); 
+	bigBoy.show();
+	peopleLeft.push(bigBoy);
+	peopleRight.exclude(smallBoyFace);});
+	
+	motherHidden.click(function () { this.hide();
+	peopleHiddenOnTheRaft.exclude(motherHidden); 
+	mother.show();
+	peopleLeft.push(mother);
+	peopleRight.exclude(motherFace);});
+	
+	smallGirlHidden.click(function () { this.hide();
+	peopleHiddenOnTheRaft.exclude(smallGirlHidden); 
+	smallGirl.show();
+	peopleLeft.push(smallGirl);
+	peopleRight.exclude(smallGirlFace);});
+	
+	bigGirlHidden.click(function () { this.hide();
+	peopleHiddenOnTheRaft.exclude(bigGirlHidden); 
+	bigGirl.show();
+	peopleLeft.push(bigGirl);
+	peopleRight.exclude(bigGirlFace);});
+	
+	officerFaceHidden.click(function () { this.hide();
+	peopleHiddenOnTheRaft.exclude(officerFaceHidden); 
+	officerFace.show();
+	peopleRight.push(officerFace);
+	peopleLeft.exclude(officer);});
+	
+	prisonerFaceHidden.click(function () { this.hide();
+	peopleHiddenOnTheRaft.exclude(prisonerFaceHidden); 
+	prisonerFace.show();
+	peopleRight.push(prisonerFace);
+	peopleLeft.exclude(prisoner);});
+	
+	fatherFaceHidden.click(function () { this.hide();
+	peopleHiddenOnTheRaft.exclude(fatherFaceHidden); 
+	fatherFace.show();
+	peopleRight.push(fatherFace);
+	peopleLeft.exclude(father);});
+	
+	smallBoyFaceHidden.click(function () { this.hide();
+	peopleHiddenOnTheRaft.exclude(smallBoyFaceHidden); 
+	smallBoyFace.show();
+	peopleRight.push(smallBoyFace);
+	peopleLeft.exclude(smallBoy);});
+	
+	bigBoyFaceHidden.click(function () { this.hide();
+	peopleHiddenOnTheRaft.exclude(bigBoyFaceHidden); 
+	bigBoyFace.show();
+	peopleRight.push(bigBoyFace);
+	peopleLeft.exclude(bigBoy);});
+	
+	motherFaceHidden.click(function () { this.hide();
+	peopleHiddenOnTheRaft.exclude(motherFaceHidden); 
+	motherFace.show();
+	peopleRight.push(motherFace);
+	peopleLeft.exclude(mother);});  
+	
+	smallGirlFaceHidden.click(function () { this.hide();
+	peopleHiddenOnTheRaft.exclude(smallGirlFaceHidden); 
+	smallGirlFace.show();
+	peopleRight.push(smallGirlFace);
+	peopleLeft.exclude(smallGirl);});  
+	
+	bigGirlFaceHidden.click(function () { this.hide();
+	peopleHiddenOnTheRaft.exclude(bigGirlFaceHidden); 
+	bigGirlFace.show();
+	peopleRight.push(bigGirlFace);
+	peopleLeft.exclude(bigGirl)});    
+	
+		buttonToRight.click(function(){
+		counter++;
+		raftWithPeople.animate({transform: "t330,0"}, 1000,
+		function(){peopleHiddenOnTheRaft.hide();
+		peopleRight.show(); 
+		peopleHiddenOnTheRaft.animate({transform:"t0,0"});
+		});
+		});  
+		
+		buttonToLeft.click(function(){
+		counterFace++;
+		raftWithPeople.exclude(peopleHiddenOnTheRaft);
+		peopleHiddenOnTheRaft
+		.forEach(function(el){el.animate({transform: "t0,0"}, 1000);});
+		raftWithPeople.push(peopleHiddenOnTheRaft);
+		raftWithPeople.animate({transform: "t0,0"}, 1000,
+		function(){peopleHiddenOnTheRaft.hide();
+		peopleLeft.show(); 
+		});
+		});
+	}());
+	
+	
+
+	</script>
+	
+  </body>
+</html>
