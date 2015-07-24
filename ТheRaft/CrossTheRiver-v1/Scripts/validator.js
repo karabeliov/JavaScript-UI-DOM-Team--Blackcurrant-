@@ -1,69 +1,87 @@
-var Validator = (function () {
-    'use strict';
-
-    function Validator(c, r) {
-        this.characters = c;
-        this.raft = r;
-    }
-    Validator.prototype.validateMove = function (people) { // array for side1 and side2
-        var isPoliceman = false;
-            isPrisoner = false;
-            isFather = false;
-            isSon = false;
-            isMother = false;
-            isDaughter = false;
-
-        var person, len;
-        for (person = 0, len = people.length; person < len; person += 1) {
-            var currPerson = people[person].role;
-
-            switch (currPerson) {
-                case policeman:
-                    isPoliceman = true;
-                    break;
-                case prisoner:
-                    isPrisoner = true;
-                    break;
-                case father:
-                    isFather = true;
-                    break;
-                case mother:
-                    isMother = true;
-                    break;
-                case son:
-                    isSon = true;
-                    break;
-                case daughter:
-                    isDaughter = true;
-                    break;
-                default:
-                    'not a hero in this game';
-            }
-        }
-
-        var isPrisoner_NonPoliceman = (isPrisoner && (isFather || isMother || isDaughter || isSon)),
-            isPrisonerRuleViolated = (!(isPoliceman && isPrisoner) && isPrisoner_NonPoliceman),
-            isDaughterRuleViolated = ((isFather && isDaughter) && !isMother),
-            isSonRuleViolated = ((isMother && isSon) && !isFather),
-
-            AreAllRulesObeyed = !(isPrisonerRuleViolated && isDaughterRuleViolated && isSonRuleViolated);
-
-        return AreAllRulesObeyed;
-
-        //Check is the side the raft is on is valid
-    };
-
-    Validator.prototype.travel = function (passed) { // pilot and passenger at raft
-        var side1 = assets.characters,   // array with all people
-            side2 = [],
-            passedPerson = side1.indexOf(passed);
-
-        if (passedPerson > -1) { // remove person from side 1
-            side1.splice(passedPerson, 1);
-        }
-
-        side2.push(passed); // add person to side 2
-    };
-
-    return Validator;
+var Validator = (function(){
+	'use strict';
+	
+	function That (c) {
+		if(!Array.isArray(c)) {
+			c = c.seated;
+		};
+		return {
+			has: function() {
+				var args = [].slice.call(arguments);
+				var len = args.length, contained = 0;
+				if (len === 0) {
+					return false;
+				}
+				for (var i = 0; i < len; i++) {
+					if (c.some(function(el){
+						return (el.role === args[i]);
+					})) {
+						contained++;
+					}
+				}
+				if (contained === len) {
+					return true;
+				}
+				return false;
+			},
+			hasNo: function() {
+				var args = [].slice.call(arguments);
+				var len = args.length, contained = 0;
+				if (len === 0) {
+					return false;
+				}
+				for (var i = 0; i < len; i++) {
+					if (c.some(function(el){
+						return (el.role === args[i]);
+					})) {
+						contained++;
+					}
+				}
+				if (contained < len) {
+					return true;
+				}
+				return false;
+			}
+		};
+	}
+	
+	function Validator(c, r, a) {
+		this.characters = c;
+		this.raft = r;
+		this.arrow = a;
+	}
+	Validator.prototype.validateMove = function () {
+		//Check if the raft can travel
+		if (this.raft.seated.length === 0) {
+			return false;
+		}
+		if (this.raft.seated.length === 1 && That(this.raft).has('criminal')) {
+			return false;
+		}
+		
+		//Check is the side the raft is on is valid
+		var side = this.raft.side;
+		var chars = [];
+		for (var i = 0, len = this.characters.length; i < len; i++) {
+			if (this.characters[i].side === side) {
+				chars.push(this.characters[i]);
+			}
+		};
+		// That(chars).has('mother') checks if the characters on the current side on the beach have a mother among them
+		// That(this.raft).hasNo('policeman') tells if there is no policeman on the raft
+		// .has and .hasNo arguments are conjunctive, function will check if all are or aren't in the group
+		console.log(That(this.raft).hasNo('mother', 'father'));
+	};
+	
+	Validator.prototype.travel = function() {
+		//This will animate:
+		// 1 -> Raft
+		
+		// 2 -> Characters on the raft
+		
+		// 3 -> Arrow button
+		
+	};
+	
+	return Validator;
 })();

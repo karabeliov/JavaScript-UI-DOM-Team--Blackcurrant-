@@ -11,7 +11,7 @@ var assets = (function(){
 	{
 	    name: 'raft',
 	    id: 2,
-	    src: 'img/raft.png',
+	    src: 'img/raft2.jpg',
 	    data: null
 	},
 	{
@@ -61,6 +61,12 @@ var assets = (function(){
 	    id: 10,
 	    src: 'img/girl2.png',
 	    data: null
+	},
+	{
+	    name: 'arrow',
+	    id: 11,
+	    src: 'img/arrow.png',
+	    data: null
 	}];
 	
 	//The raft
@@ -103,8 +109,22 @@ var assets = (function(){
 		}
 	};
 	
+	//The arrow
+	assets.arrow = {
+		position: {
+			left: {
+				x: 310,
+				y: 340,
+			},
+			right: {
+				x: 340,
+				y: 340
+			}
+		}
+	};
+	
 	//List of game characters
-	assets.characters =[
+	assets.characters = [
 		{
 			name: 'policeman',
 			role: 'policeman',
@@ -114,8 +134,8 @@ var assets = (function(){
 					y: 100,
 				},
 				right: {
-					x: 220,
-					y: 200
+					x: 600,
+					y: 100
 				}
 			}
 		},
@@ -128,8 +148,8 @@ var assets = (function(){
 					y: 100,
 				},
 				right: {
-					x: 220,
-					y: 200
+					x: 650,
+					y: 100
 				}
 			}
 		},
@@ -142,8 +162,8 @@ var assets = (function(){
 					y: 180,
 				},
 				right: {
-					x: 220,
-					y: 200
+					x: 540,
+					y: 180
 				}
 			}
 		},
@@ -156,8 +176,8 @@ var assets = (function(){
 					y: 260,
 				},
 				right: {
-					x: 220,
-					y: 200
+					x: 540,
+					y: 260
 				}
 			}
 		},
@@ -170,8 +190,8 @@ var assets = (function(){
 					y: 260,
 				},
 				right: {
-					x: 220,
-					y: 200
+					x: 600,
+					y: 260
 				}
 			}
 		},
@@ -184,8 +204,8 @@ var assets = (function(){
 					y: 260,
 				},
 				right: {
-					x: 220,
-					y: 200
+					x: 660,
+					y: 260
 				}
 			}
 		},
@@ -198,8 +218,8 @@ var assets = (function(){
 					y: 180,
 				},
 				right: {
-					x: 220,
-					y: 200
+					x: 600,
+					y: 180
 				}
 			}
 		},
@@ -212,8 +232,8 @@ var assets = (function(){
 					y: 180,
 				},
 				right: {
-					x: 220,
-					y: 200
+					x: 660,
+					y: 180
 				}
 			}
 		}

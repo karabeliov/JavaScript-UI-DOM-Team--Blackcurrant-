@@ -42,6 +42,7 @@
         loading.setX(gameStage.width() / 2 - 100);
         loading.setText('[ P L A Y ]');
         loadscreen.batchDraw();
+        game.status = 'playing';
         loadscreen.on('click', start);
     }
     
@@ -77,6 +78,25 @@
             characters[i].init();
         }
         console.log(characters);
+        
+        //Initialize traver button
+        var arrowButton = images.getImage('arrow');
+        arrowButton = new Kinetic.Image({
+            x: assets.arrow.position.left.x,
+            y: assets.arrow.position.left.y,
+            image: arrowButton,
+            scaleX: 0.6,
+            scaleY: 0.6,
+        });
+        arrowButton.on('click', function(){
+            validator.validateMove();
+        });
+        
+        //Initializing validator
+        var validator = new Validator(characters, raft);
+        
+        gameLayer.add(arrowButton);
+        gameLayer.batchDraw();
         
     }
     

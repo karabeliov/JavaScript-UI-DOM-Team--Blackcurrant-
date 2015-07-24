@@ -79,7 +79,7 @@ var Character = (function(){
 		});
 		this.player.on('click', function(){
 			self.onClick();
-		})
+		});
 		this.layer.add(this.player);
 	};
 	

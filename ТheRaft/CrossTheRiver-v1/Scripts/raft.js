@@ -48,6 +48,9 @@ var Raft = (function(){
 	};
 	
 	Raft.prototype.unseat = function (c) {
+		if (!(c instanceof Character)) {
+			throw 'Argument suplied is not a valid character!';
+		}
 		var reseated = [];
 		if (this.seated.length > 0) {
 			if (c.seat !== 'none') {
@@ -63,6 +66,9 @@ var Raft = (function(){
 	}
 	
 	Raft.prototype.takeASeat = function (c) {
+		if(!(c instanceof Character)) {
+			throw 'Argument suplied is not a valid character!';
+		}
 		if (this.seated.length < 2) {
 			this.seated.push(c);
 			if (!this.seatsTaken.left) {
