@@ -89,7 +89,31 @@
             scaleY: 0.6,
         });
         arrowButton.on('click', function(){
-            validator.validateMove();
+            //console.log(validator.validateMove());
+            if (validator.validateMove()) {
+                raft.travel();
+                if (raft.side === 'left') {
+                    new Kinetic.Tween({
+                        node: arrowButton,
+                        x: 310,
+                        scaleX: 0.6,
+                        duration: 1,
+                        onFinish: function () {
+                            setTimeout(hasWon, 1200);
+                        }
+                    }).play();
+                } else {
+                    new Kinetic.Tween({
+                        node: arrowButton,
+                        x: 510,
+                        scaleX: -0.6,
+                        duration: 1,
+                        onFinish: function () {
+                            setTimeout(hasWon, 1200);
+                        }
+                    }).play();
+                }
+            }
         });
         
         //Initializing validator
@@ -97,6 +121,19 @@
         
         gameLayer.add(arrowButton);
         gameLayer.batchDraw();
+        
+        //Some checks
+        function hasWon() {
+            var onTheRightSide = 0
+            for (var i = 0, len = characters.length; i < len; i++) {
+                if (characters[i].side === 'right') {
+                    ++onTheRightSide;
+                }
+            }
+            if (onTheRightSide === 8) {
+                console.log('You have won!');
+            }
+        }
         
     }
     

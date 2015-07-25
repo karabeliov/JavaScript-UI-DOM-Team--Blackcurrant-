@@ -25,7 +25,7 @@ var Character = (function(){
 		var self = this;
 		//check if character is on the raft then move it back
 		if (this.side === 'raft') {
-			console.log('returning from raft');
+			//console.log('returning from raft');
 			this.inAnimation = true;
 			this.animation = new Kinetic.Tween({
 				node: this.player,
@@ -51,7 +51,7 @@ var Character = (function(){
 		}
 		//then get position for animation, assign true to the seat of the raft
 		//assing the opposite side for the character and start animation
-		console.log('going to raft, side: ' + this.raft.side);
+		//console.log('going to raft, side: ' + this.raft.side);
 		var goto = this.raft.takeASeat(this);
 		this.side = 'raft';
 		this.seat = goto.seat;

@@ -37,7 +37,7 @@ var Validator = (function(){
 						contained++;
 					}
 				}
-				if (contained < len) {
+				if (contained = len) {
 					return true;
 				}
 				return false;
@@ -51,11 +51,28 @@ var Validator = (function(){
 		this.arrow = a;
 	}
 	Validator.prototype.validateMove = function () {
+		var boy = false, girl = false, father = false, mother = false, policeman = false, criminal = false;
 		//Check if the raft can travel
+		boy = That(this.raft).has('boy');
+		girl = That(this.raft).has('girl');
+		father = That(this.raft).has('father');
+		mother = That(this.raft).has('mother');
+		policeman = That(this.raft).has('policeman');
+		criminal = That(this.raft).has('criminal');
+		
 		if (this.raft.seated.length === 0) {
 			return false;
 		}
-		if (this.raft.seated.length === 1 && That(this.raft).has('criminal')) {
+		if (this.raft.seated.length === 1 && criminal) {
+			return false;
+		}
+		if (criminal && !policeman) {
+			return false;
+		}
+		if ((boy || girl) && !(mother || father || policeman)) {
+			return false;
+		}
+		if ((boy && mother) || (girl && father)) {
 			return false;
 		}
 		
@@ -67,10 +84,16 @@ var Validator = (function(){
 				chars.push(this.characters[i]);
 			}
 		};
-		// That(chars).has('mother') checks if the characters on the current side on the beach have a mother among them
-		// That(this.raft).hasNo('policeman') tells if there is no policeman on the raft
-		// .has and .hasNo arguments are conjunctive, function will check if all are or aren't in the group
-		console.log(That(this.raft).hasNo('mother', 'father'));
+		
+		boy = That(chars).has('boy');
+		girl = That(chars).has('girl');
+		father = That(chars).has('father');
+		mother = That(chars).has('mother');
+		policeman = That(chars).has('policeman');
+		criminal = That(chars).has('criminal');
+		
+		//Finally:
+		return true;
 	};
 	
 	Validator.prototype.travel = function() {

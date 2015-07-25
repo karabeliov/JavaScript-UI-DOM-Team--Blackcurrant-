@@ -28,6 +28,10 @@ var Raft = (function(){
 				duration: 0.7,
 				onFinish: function(){
 					self.inAnimation = false;
+					var seats = self.seated.slice();
+					for (var i = 0, len = seats.length; i < len; i++) {
+						seats[i].onClick();
+					}
 				}
 			});
 			this.animation.play();
@@ -41,6 +45,10 @@ var Raft = (function(){
 				duration: 0.7,
 				onFinish: function(){
 					self.inAnimation = false;
+					var seats = self.seated.slice();
+					for (var i = 0, len = seats.length; i < len; i++) {
+						seats[i].onClick();
+					}
 				}
 			});
 			this.animation.play();
@@ -97,15 +105,15 @@ var Raft = (function(){
 	};
 	
 	Raft.prototype.init = function () {
-		var self = this;
+		//var self = this;
 		this.player = new Kinetic.Image({
 			x: this.position[this.side].x,
 			y: this.position[this.side].y,
 			image: this.image
 		});
-		this.player.on('click', function(){
-			self.travel();
-		});
+		// this.player.on('click', function(){
+		// 	self.travel();
+		// });
 		this.layer.add(this.player);
 		this.layer.batchDraw();
 	};
