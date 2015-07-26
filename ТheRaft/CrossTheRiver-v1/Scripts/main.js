@@ -162,12 +162,21 @@
         var won = new Kinetic.Text({
             x: gameStage.width() / 2 - 120,
             y: 100,
-            text: 'You have won! Moves made: ' + game.movesMade + '.',
+            text: 'You have won!',
+            fontSize: 38,
+            fontFamily: 'Verdana',
+            fill: 'red'
+        });
+        var won2 = new Kinetic.Text({
+            x: gameStage.width() / 2 - 120,
+            y: 140,
+            text: 'Moves made: ' + game.movesMade + '.',
             fontSize: 38,
             fontFamily: 'Verdana',
             fill: 'red'
         });
         gameLayer.add(won);
+        gameLayer.add(won2);
         gameLayer.batchDraw();
     }
     
