@@ -95,6 +95,7 @@
             //console.log(validator.validateMove());
             if (validator.validateMove()) {
                 raft.travel();
+                game.movesMade++;
                 if (raft.side === 'left') {
                     new Kinetic.Tween({
                         node: arrowButton,
@@ -161,7 +162,7 @@
         var won = new Kinetic.Text({
             x: gameStage.width() / 2 - 120,
             y: 100,
-            text: 'You have won!',
+            text: 'You have won! Moves made: ' + game.movesMade + '.',
             fontSize: 38,
             fontFamily: 'Verdana',
             fill: 'red'

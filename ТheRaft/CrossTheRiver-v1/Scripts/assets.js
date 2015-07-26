@@ -11,7 +11,7 @@ var assets = (function(){
 	{
 	    name: 'raft',
 	    id: 2,
-	    src: 'img/raft2.jpg',
+	    src: 'img/raft2.png',
 	    data: null
 	},
 	{
