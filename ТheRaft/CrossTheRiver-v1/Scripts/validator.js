@@ -101,10 +101,10 @@ var Validator = (function(){
 			console.log('Error 37!');
 			return false;
 		}
-		if (mother && That(chars).has('boy') && That(chars).hasNo('father')) {
+		if (mother && !father && That(chars).has('boy') && That(chars).hasNo('father')) {
 			return false;
 		}
-		if (father && That(chars).has('girl') && That(chars).hasNo('mother')) {
+		if (father && !mother && That(chars).has('girl') && That(chars).hasNo('mother')) {
 			return false;
 		}
 		
