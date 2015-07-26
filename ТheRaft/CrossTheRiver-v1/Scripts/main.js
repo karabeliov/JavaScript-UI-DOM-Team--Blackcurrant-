@@ -117,7 +117,6 @@
                     }).play();
                 }
             } else {
-                console.log('play wrong');
                 playWrong();
             }
         });
@@ -172,31 +171,5 @@
     }
     
     init();
-    // var images = new ImageList();
-    // images.enlist(assets.images);
-    // images.onProgress(function(p){
-    //     console.log(p + '%');
-    // });
-    // images.onLoad(function(){
-    //     console.log('Done.');
-    //     var bg = (images.getImage('background'));
-    //     var back = new Kinetic.Layer();
-    //     var bgimg = new Kinetic.Image({
-    //         x: 0,
-    //         y: 0,
-    //         image: bg
-    //     });
-    //     back.add(bgimg);
-    //     gameStage.add(back);
-    //     back.batchDraw();
-    //     var raft = new Raft(assets.raft, images);
-    //     var characters = [];
-    //     for (var i = 0, len = assets.characters.length; i < len; i++){
-    //         characters.push(new Character(assets.characters[i], raft, images));
-    //     }
-    //     console.log(characters);
-    //     console.log(raft);
-    // });
-    //images.preload();
 
 })();

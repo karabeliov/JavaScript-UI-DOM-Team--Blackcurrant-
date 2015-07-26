@@ -51,8 +51,7 @@ var Validator = (function(){
 		this.arrow = a;
 	}
 	Validator.prototype.validateMove = function () {
-		//Just for check
-		//return true;
+		var side, chars;
 		
 		var boy = false, girl = false, father = false, mother = false, policeman = false, criminal = false;
 		//Check if the raft can travel
@@ -64,24 +63,48 @@ var Validator = (function(){
 		criminal = That(this.raft).has('criminal');
 		
 		if (this.raft.seated.length === 0) {
+			console.log('Raft is empty.');
 			return false;
 		}
 		if (this.raft.seated.length === 1 && criminal) {
+			console.log('Criminal can\'t travel alone.');
 			return false;
 		}
 		if (criminal && !policeman) {
+			console.log('Criminal can\'t travel without policeman.');
 			return false;
 		}
 		if ((boy || girl) && !(mother || father || policeman)) {
+			console.log('Children can\'t travel alone.');
 			return false;
 		}
 		if ((boy && mother) || (girl && father)) {
+			console.log('Children can\'t travel with opposite gender parent');
+			return false;
+		}
+		
+		var policemanOnRaft = policeman;
+		
+		//Check the opposite side
+		if (this.raft.side === 'left') {
+			side = 'right';
+		} else {
+			side = 'left'
+		}
+		chars = [];
+		for (var i = 0, len = this.characters.length; i < len; i++) {
+			if (this.characters[i].side === side) {
+				chars.push(this.characters[i]);
+			}
+		};
+		if (!policemanOnRaft && That(chars).has('criminal') && !That(chars).has('policeman')) {
+			console.log('Error 37!');
 			return false;
 		}
 		
 		//Check is the side the raft is on is valid
-		var side = this.raft.side;
-		var chars = [];
+		side = this.raft.side;
+		chars = [];
 		for (var i = 0, len = this.characters.length; i < len; i++) {
 			if (this.characters[i].side === side) {
 				chars.push(this.characters[i]);
