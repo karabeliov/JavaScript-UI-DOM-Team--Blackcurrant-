@@ -63,23 +63,23 @@ var Validator = (function(){
 		criminal = That(this.raft).has('criminal');
 		
 		if (this.raft.seated.length === 0) {
-			console.log('Raft is empty.');
+			//console.log('Raft is empty.');
 			return false;
 		}
 		if (this.raft.seated.length === 1 && criminal) {
-			console.log('Criminal can\'t travel alone.');
+			//console.log('Criminal can\'t travel alone.');
 			return false;
 		}
 		if (criminal && !policeman) {
-			console.log('Criminal can\'t travel without policeman.');
+			//console.log('Criminal can\'t travel without policeman.');
 			return false;
 		}
 		if ((boy || girl) && !(mother || father || policeman)) {
-			console.log('Children can\'t travel alone.');
+			//console.log('Children can\'t travel alone.');
 			return false;
 		}
 		if ((boy && mother) || (girl && father)) {
-			console.log('Children can\'t travel with opposite gender parent');
+			//console.log('Children can\'t travel with opposite gender parent');
 			return false;
 		}
 		
@@ -98,13 +98,15 @@ var Validator = (function(){
 			}
 		};
 		if (!policemanOnRaft && That(chars).has('criminal') && !That(chars).has('policeman')) {
-			console.log('Error 37!');
+			//console.log('Error 37!');
 			return false;
 		}
-		if (mother && !father && That(chars).has('boy') && That(chars).hasNo('father')) {
+		if (mother && !father && That(chars).has('boy') && !That(chars).has('father')) {
+			//console.log('Error 38!');
 			return false;
 		}
-		if (father && !mother && That(chars).has('girl') && That(chars).hasNo('mother')) {
+		if (father && !mother && That(chars).has('girl') && !That(chars).has('mother')) {
+			//console.log('Error 39!');
 			return false;
 		}
 		
@@ -138,13 +140,7 @@ var Validator = (function(){
 	};
 	
 	Validator.prototype.travel = function() {
-		//This will animate:
-		// 1 -> Raft
-		
-		// 2 -> Characters on the raft
-		
-		// 3 -> Arrow button
-		
+		//Deprecated
 	};
 	
 	return Validator;
