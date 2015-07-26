@@ -48,6 +48,7 @@
     
     //This is the enclosing function of the actual game
     function start() {
+        var gameWon = false;
         var bg = images.getImage('background');
         var background = new Kinetic.Image({
             x: 0,
@@ -77,7 +78,6 @@
             characters.push(new Character(assets.characters[i], raft, images, gameLayer));
             characters[i].init();
         }
-        console.log(characters);
         
         //Initialize traver button
         var arrowButton = images.getImage('arrow');
@@ -89,6 +89,9 @@
             scaleY: 0.6,
         });
         arrowButton.on('click', function(){
+            if (gameWon) {
+                return;
+            }
             //console.log(validator.validateMove());
             if (validator.validateMove()) {
                 raft.travel();
@@ -113,6 +116,9 @@
                         }
                     }).play();
                 }
+            } else {
+                console.log('play wrong');
+                playWrong();
             }
         });
         
@@ -122,6 +128,20 @@
         gameLayer.add(arrowButton);
         gameLayer.batchDraw();
         
+        var wrongImg = images.getImage('wrong');
+        var wrong = new Kinetic.Image({
+            x: gameStage.width() / 2 - 50,
+            y: 120,
+            image: wrongImg
+        });
+        
+        function playWrong() {
+            gameLayer.add(wrong);
+            gameLayer.batchDraw();
+            setTimeout(function() {
+                wrong.remove();
+            }, 500);
+        }
         //Some checks
         function hasWon() {
             var onTheRightSide = 0
@@ -131,10 +151,24 @@
                 }
             }
             if (onTheRightSide === 8) {
-                console.log('You have won!');
+                gameWon = true;
+                Win();
             }
         }
         
+    }
+    
+    function Win() {
+        var won = new Kinetic.Text({
+            x: gameStage.width() / 2 - 120,
+            y: 100,
+            text: 'You have won!',
+            fontSize: 38,
+            fontFamily: 'Verdana',
+            fill: 'red'
+        });
+        gameLayer.add(won);
+        gameLayer.batchDraw();
     }
     
     init();

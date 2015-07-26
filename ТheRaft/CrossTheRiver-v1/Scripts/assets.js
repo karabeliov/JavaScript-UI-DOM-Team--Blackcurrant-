@@ -67,6 +67,12 @@ var assets = (function(){
 	    id: 11,
 	    src: 'img/arrow.png',
 	    data: null
+	},
+	{
+	    name: 'wrong',
+	    id: 12,
+	    src: 'img/wrong.png',
+	    data: null
 	}];
 	
 	//The raft
@@ -144,11 +150,11 @@ var assets = (function(){
 			role: 'criminal',
 			position : {
 				left: {
-					x: 150,
+					x: 170,
 					y: 100,
 				},
 				right: {
-					x: 650,
+					x: 670,
 					y: 100
 				}
 			}

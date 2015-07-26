@@ -51,6 +51,9 @@ var Validator = (function(){
 		this.arrow = a;
 	}
 	Validator.prototype.validateMove = function () {
+		//Just for check
+		//return true;
+		
 		var boy = false, girl = false, father = false, mother = false, policeman = false, criminal = false;
 		//Check if the raft can travel
 		boy = That(this.raft).has('boy');
@@ -92,6 +95,15 @@ var Validator = (function(){
 		policeman = That(chars).has('policeman');
 		criminal = That(chars).has('criminal');
 		
+		if (chars.length > 1 && criminal && !policeman) {
+			return false;
+		}
+		if (boy && mother && !father) {
+			return false;
+		}
+		if (girl && father && !mother) {
+			return false;
+		}
 		//Finally:
 		return true;
 	};
