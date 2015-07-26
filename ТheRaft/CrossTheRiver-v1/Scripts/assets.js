@@ -91,24 +91,24 @@ var assets = (function(){
 			seat1 : {
 				position: {
 					left: {
-						x: 400,
-						y: 400, 
+						x: 280,
+						y: 220, 
 					},
 					right: {
-						x: 420,
-						y: 400
+						x: 390,
+						y: 220
 					}
 				}
 			},
 			seat2 : {
 				position: {
 					left: {
-						x: 500,
-						y: 400 
+						x: 310,
+						y: 270 
 					},
 					right: {
-						x: 520,
-						y: 400
+						x: 420,
+						y: 270
 					}
 				}
 			}

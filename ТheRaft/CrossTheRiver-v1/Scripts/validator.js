@@ -140,7 +140,21 @@ var Validator = (function(){
 	};
 	
 	Validator.prototype.travel = function() {
-		//Deprecated
+		var dx, x;
+		if (this.raft.side === 'left') {
+			dx = 110;
+		} else {
+			dx = -110;
+		}
+		for (var i = 0, len = this.raft.seated.length; i < len; i++) {
+			x = this.raft.seated[i].player.getX();
+			this.raft.seated[i].animation = new Kinetic.Tween({
+				node: this.raft.seated[i].player,
+				x: x + dx,
+				duration: 0.69
+			});
+			this.raft.seated[i].animation.play();
+		}
 	};
 	
 	return Validator;

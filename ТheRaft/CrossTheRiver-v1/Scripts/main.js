@@ -94,6 +94,7 @@
             }
             //console.log(validator.validateMove());
             if (validator.validateMove()) {
+                validator.travel();
                 raft.travel();
                 game.movesMade++;
                 if (raft.side === 'left') {
