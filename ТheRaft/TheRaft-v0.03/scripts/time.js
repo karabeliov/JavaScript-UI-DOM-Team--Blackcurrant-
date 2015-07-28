@@ -1,4 +1,4 @@
-function startTime() {
+function startTime(stopTimer) {
     var display = document.getElementById('checkTime'),
         timer = 60 * 10,
         minutes,
@@ -12,5 +12,9 @@ function startTime() {
         seconds = seconds < 10 ? '0' + seconds : seconds;
 
         display.innerHTML = minutes + ':' + seconds;
+
+        if (--timer < 0) {
+            timer = duration;
+        }
     }, 1000);
 }
