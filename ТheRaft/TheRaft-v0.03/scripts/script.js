@@ -10,7 +10,7 @@
 
     var Person = {
         onShore: true
-    }
+    };
 
     // Protector
     var cop = (function (parent) {
@@ -74,4 +74,4 @@
             }
         }
     }
-}())
+}());

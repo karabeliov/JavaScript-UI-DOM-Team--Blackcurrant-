@@ -88,7 +88,7 @@
             y: assets.arrow.position.left.y,
             image: arrowButton,
             scaleX: 0.6,
-            scaleY: 0.6,
+            scaleY: 0.6
         });
 
         arrowButton.on('click', function(){
@@ -150,7 +150,7 @@
         }
         //Some checks
         function hasWon() {
-            var onTheRightSide = 0
+            var onTheRightSide = 0;
             for (var i = 0, len = characters.length; i < len; i++) {
                 if (characters[i].side === 'right') {
                     ++onTheRightSide;

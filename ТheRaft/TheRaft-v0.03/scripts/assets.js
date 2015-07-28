@@ -69,7 +69,7 @@ var assets = (function(){
 		position: {
 			left: {
 				x: 270,
-				y: 300, 
+				y: 300
 			},
 			right: {
 				x: 500,
@@ -81,7 +81,7 @@ var assets = (function(){
 				position: {
 					left: {
 						x: 280,
-						y: 300, 
+						y: 300
 					},
 					right: {
 						x: 500,
@@ -109,7 +109,7 @@ var assets = (function(){
 		position: {
 			left: {
 				x: 380,
-				y: 400,
+				y: 400
 			},
 			right: {
 				x: 540,
@@ -126,7 +126,7 @@ var assets = (function(){
 			position : {
 				left: {
 					x: 40,
-					y: 170,
+					y: 170
 				},
 				right: {
 					x: 630,
@@ -139,7 +139,7 @@ var assets = (function(){
 			position : {
 				left: {
 					x: 100,
-					y: 190,
+					y: 190
 				},
 				right: {
 					x: 700,
@@ -152,7 +152,7 @@ var assets = (function(){
 			position : {
 				left: {
 					x: 40,
-					y: 280,
+					y: 280
 				},
 				right: {
 					x: 570,
@@ -165,7 +165,7 @@ var assets = (function(){
 			position : {
 				left: {
 					x: 40,
-					y: 400,
+					y: 400
 				},
 				right: {
 					x: 620,
@@ -178,7 +178,7 @@ var assets = (function(){
 			position : {
 				left: {
 					x: 140,
-					y: 440,
+					y: 440
 				},
 				right: {
 					x: 700,
@@ -191,7 +191,7 @@ var assets = (function(){
 			position : {
 				left: {
 					x: 200,
-					y: 440,
+					y: 440
 				},
 				right: {
 					x: 760,
@@ -204,7 +204,7 @@ var assets = (function(){
 			position : {
 				left: {
 					x: 130,
-					y: 310,
+					y: 310
 				},
 				right: {
 					x: 640,
@@ -217,7 +217,7 @@ var assets = (function(){
 			position : {
 				left: {
 					x: 190,
-					y: 310,
+					y: 310
 				},
 				right: {
 					x: 700,

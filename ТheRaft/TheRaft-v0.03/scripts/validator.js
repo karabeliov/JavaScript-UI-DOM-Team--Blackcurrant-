@@ -4,7 +4,7 @@ var Validator = (function(){
 	function That (c) {
 		if(!Array.isArray(c)) {
 			c = c.seated;
-		};
+		}
 		return {
 			has: function() {
 				var args = [].slice.call(arguments);
@@ -96,7 +96,7 @@ var Validator = (function(){
 			if (this.characters[i].side === side) {
 				chars.push(this.characters[i]);
 			}
-		};
+		}
 		if (!policemanOnRaft && That(chars).has('criminal') && !That(chars).has('policeman')) {
 			//console.log('Error 37!');
 			return false;
@@ -117,7 +117,7 @@ var Validator = (function(){
 			if (this.characters[i].side === side) {
 				chars.push(this.characters[i]);
 			}
-		};
+		}
 		
 		boy = That(chars).has('boy');
 		girl = That(chars).has('girl');
