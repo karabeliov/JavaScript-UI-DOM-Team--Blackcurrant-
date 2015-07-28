@@ -52,6 +52,20 @@
 	border-radius: 0 0 5px 5px;
 }
 
+#instructions {
+	position: absolute;
+	right: 500px;
+	top: 1px;
+	padding: 0 30px;
+	text-align: center;
+	font-family: "Times New Roman", Georgia, Serif;
+	font-size: 2em;
+	color: white;
+	background-color: #000;
+	border-radius: 0 0 5px 5px;
+	visibility: hidden;
+}
+
 #restart {
 	position: absolute;
 	left: 300px;
@@ -63,5 +77,13 @@
 	background-color: #000;
 	border-radius: 5px 5px 0 0;
 	border: none;
+	visibility: hidden;
+}
+
+#paper {
+	position: absolute;
+	display: inline-block;
+	top: -20px;
+	left: 300px;
 	visibility: hidden;
 }

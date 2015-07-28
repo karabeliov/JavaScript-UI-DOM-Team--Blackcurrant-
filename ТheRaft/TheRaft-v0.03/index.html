@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>Cross the River</title>
+	<link rel="shortcut icon" href="images/favicon.ico">
     <link href="css/normalize.css" rel="stylesheet" />
     <link href="css/main.css" rel="stylesheet" />
     <script src="scripts/kinetic-v5.1.0.js"></script>
@@ -17,16 +18,21 @@
     <script src="scripts/nature/water.js"></script>
     <script src="scripts/time.js"></script>
     <script src="scripts/counterMovement.js"></script>
+    <script src="scripts/instructions.js"></script>
 </head>
 <body>
     <div id="main">
     	<div id="game">
             <canvas id="minutes"></canvas>
         </div>
+        <div  id="paper">
+            <canvas></canvas>
+        </div>
     </div>
     <span id="checkTime"></span>
+    <input type="button" id="instructions" value="Instructions" onclick="visibility()">
     <span id="counterMovement"></span>
-    <input type="button" id="restart" value="Restart" onclick="restart();">
+    <input type="button" id="restart" value="Restart" onclick="restart()">
     <script src="Scripts/main.js"></script>
 </body>
 </html>

@@ -52,6 +52,7 @@
         var gameWon = false;
         var bg = images.getImage('background');
         var button = document.getElementById('restart');
+        var instructionButton = document.getElementById('instructions');
         var background = new Kinetic.Image({
             x: 0,
             y: 0,
@@ -66,7 +67,9 @@
         //Initializing background
         startTime();
         countMove();
+        instructions();
         button.style.visibility = 'visible';
+        instructionButton.style.visibility = 'visible';  
         bgLayer.add(background);
         gameStage.add(bgLayer);
         bgLayer.batchDraw();
