@@ -45,7 +45,6 @@
 	top: 1px;
 	padding: 0 30px;
 	text-align: center;
-	font-family: "Times New Roman", Georgia, Serif;
 	font-size: 2em;
 	color: white;
 	background-color: #000;
@@ -54,22 +53,22 @@
 
 #instructions {
 	position: absolute;
-	right: 500px;
-	top: 1px;
+	right: 300px;
+	top: 563px;
 	padding: 0 30px;
 	text-align: center;
-	font-family: "Times New Roman", Georgia, Serif;
 	font-size: 2em;
 	color: white;
 	background-color: #000;
-	border-radius: 0 0 5px 5px;
+	border-radius: 5px 5px 0 0;
+	border: none;
 	visibility: hidden;
 }
 
 #restart {
 	position: absolute;
 	left: 300px;
-	top: 562px;
+	top: 563px;
 	padding: 0 30px;
 	text-align: center;
 	font-size: 2em;
@@ -85,5 +84,14 @@
 	display: inline-block;
 	top: -20px;
 	left: 300px;
+	visibility: hidden;
+}
+
+#goodLuck {
+	position: absolute;
+	top: 300px;
+	left: 500px;
+	margin: 100px;
+	z-index: 3;
 	visibility: hidden;
 }

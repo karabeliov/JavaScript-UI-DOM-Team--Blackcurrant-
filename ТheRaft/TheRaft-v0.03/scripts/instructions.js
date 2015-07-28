@@ -8,12 +8,14 @@
   });
   
   var paper = document.getElementById('paper');
+  var goodLuck = document.getElementById('goodLuck');
   var layer = new Kinetic.Layer();
   
   var rect = new Kinetic.Rect({
       x: 50,
       y: 70,
       opacity: 0.8,
+	  cornerRadius: 15,
       width: 700, 
       height: 500, 
       fill: 'white', 
@@ -108,7 +110,7 @@
       fill: 'black',
       stroke: 'black'
   });
-  
+		
   layer.add(rect);
   layer.add(text);
   layer.add(line1);
@@ -125,8 +127,10 @@
   function visibility() {
     if (paper.style.visibility == 'visible') {
       paper.style.visibility='hidden';
+      goodLuck.style.visibility='hidden';
     }
     else {
       paper.style.visibility='visible';
+      goodLuck.style.visibility='visible';
     }
   }
