@@ -51,6 +51,7 @@
     function start() {
         var gameWon = false;
         var bg = images.getImage('background');
+        var button = document.getElementById('restart');
         var background = new Kinetic.Image({
             x: 0,
             y: 0,
@@ -62,9 +63,10 @@
         loading.remove();
         loadscreen.remove();
         
-        //Initializing background  
+        //Initializing background
         startTime();
         countMove();
+        button.style.visibility = 'visible';
         bgLayer.add(background);
         gameStage.add(bgLayer);
         bgLayer.batchDraw();
@@ -192,3 +194,7 @@
 
     init();
 })();
+
+function restart() {
+    window.location.reload();
+}
