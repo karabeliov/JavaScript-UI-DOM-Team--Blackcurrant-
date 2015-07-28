@@ -49,6 +49,7 @@
     
     //This is the enclosing function of the actual game
     function start() {
+        startTime();
         var gameWon = false;
         var bg = images.getImage('background');
         var background = new Kinetic.Image({
@@ -187,6 +188,6 @@
         gameLayer.add(won2);
         gameLayer.batchDraw();
     }
-    
+
     init();
 })();
