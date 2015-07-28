@@ -12,10 +12,5 @@ function startTime() {
         seconds = seconds < 10 ? '0' + seconds : seconds;
 
         display.innerHTML = minutes + ':' + seconds;
-        //console.log(minutes + ':' + seconds);
-
-        if (--timer < 0) {
-            timer = duration;
-        }
     }, 1000);
 }
