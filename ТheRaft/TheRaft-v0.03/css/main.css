@@ -36,6 +36,18 @@
 	font-size: 2em;
 	color: white;
 	background-color: #000;
-	border: 3px solid #FFF;
+	border-radius: 0 0 5px 5px;
+}
+
+#counterMovement {
+	position: absolute;
+	right: 300px;
+	top: 1px;
+	padding: 0 30px;
+	text-align: center;
+	font-family: "Times New Roman", Georgia, Serif;
+	font-size: 2em;
+	color: white;
+	background-color: #000;
 	border-radius: 0 0 5px 5px;
 }
