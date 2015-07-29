@@ -56,7 +56,7 @@
       y: 230,
       fontFamily: 'Verdana',
       fontSize: 18,
-      text: '- Only two people can be on the raft at one time.',
+      text: '- Not more than two people can be on the raft at one time.',
       fill: 'black',
       stroke: 'black'
   });
