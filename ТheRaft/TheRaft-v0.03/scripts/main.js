@@ -49,7 +49,7 @@
     
     //This is the enclosing function of the actual game
     function start() {
-        var gameWon = false;
+        var gameWon = false, gameLost = false;
         var bg = images.getImage('background');
         var button = document.getElementById('restart');
         var instructionButton = document.getElementById('instructions');
@@ -64,12 +64,22 @@
         loading.remove();
         loadscreen.remove();
         
-        //Initializing background
-        startTime();
+        //Initializing game timer
+        var timer = new Timer();
+        timer.init('checkTime');
+        timer.setTimer(10 * 60);
+        timer.trigger = function () {
+            gameLost = true;
+            Loss();
+        };
+        timer.startTimer();
+        
         countMove();
         instructions();
         button.style.visibility = 'visible';
         instructionButton.style.visibility = 'visible';  
+        
+        //Initializing background
         bgLayer.add(background);
         gameStage.add(bgLayer);
         bgLayer.batchDraw();
@@ -169,6 +179,32 @@
             }
         }
         
+        function Loss() {
+            arrowButton.off('click');
+            var gll = new Kinetic.Layer();
+            var blk = new Kinetic.Rect({
+                x: 0,
+                y: 0,
+                width: gameStage.width(),
+                height: gameStage.height(),
+                fill: 'black',
+                opacity: 0.7
+            });
+            var lt = new Kinetic.Text({
+                x: gameStage.width() / 2 - 100,
+                y: gameStage.height() / 2 - 20,
+                fontFamily: 'Verdana',
+                fontSize: 30,
+                fontWeight: 'bold',
+                text: 'You have lost!',
+                fill: 'red'
+            });
+            gll.add(blk);
+            gll.add(lt);
+            gameStage.add(gll);
+            gll.batchDraw();
+        }
+        
     }
     
     function Win() {
@@ -198,6 +234,6 @@
     init();
 })();
 
-function restart() {
+document.getElementById('restart').addEventListener('click', function() {
     window.location.reload();
-}
+}, false);
