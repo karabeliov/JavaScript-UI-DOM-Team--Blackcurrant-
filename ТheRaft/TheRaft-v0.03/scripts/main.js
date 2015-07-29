@@ -175,6 +175,7 @@
 
             if (onTheRightSide === 8) {
                 gameWon = true;
+                timer.stopTimer();
                 Win();
             }
         }
