@@ -1,7 +1,10 @@
- body, html { 
+body, html { 
 	margin: 0;
 	padding: 0;
-	background-color: black;
+}
+
+body {	
+	background-image: url("background.jpg");
 }
 
 #main {
@@ -11,6 +14,9 @@
 #game {
 	width: 800px;
 	margin: auto;
+	border: 3px solid black;
+	border-radius: 7px;
+    box-shadow: 10px 10px 5px #888888;
 }
 
 #description {
@@ -54,7 +60,7 @@
 #instructions {
 	position: absolute;
 	right: 300px;
-	top: 563px;
+	top: 573px;
 	padding: 0 30px;
 	text-align: center;
 	font-size: 2em;
@@ -68,7 +74,7 @@
 #restart {
 	position: absolute;
 	left: 300px;
-	top: 563px;
+	top: 573px;
 	padding: 0 30px;
 	text-align: center;
 	font-size: 2em;
