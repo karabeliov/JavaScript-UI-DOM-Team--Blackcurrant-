@@ -142,9 +142,9 @@ var Validator = (function(){
 	Validator.prototype.travel = function() {
 		var dx, x;
 		if (this.raft.side === 'left') {
-			dx = 110;
+			dx = 220;
 		} else {
-			dx = -110;
+			dx = -220;
 		}
 		for (var i = 0, len = this.raft.seated.length; i < len; i++) {
 			x = this.raft.seated[i].player.getX();
