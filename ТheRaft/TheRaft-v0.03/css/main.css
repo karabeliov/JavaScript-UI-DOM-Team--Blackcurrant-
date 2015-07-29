@@ -95,3 +95,21 @@
 	z-index: 3;
 	visibility: hidden;
 }
+
+#lost {
+	position: absolute;
+	top: 250px;
+	left: 525px;
+	margin: 100px;
+	z-index: 3;
+	visibility: hidden;
+}
+
+#winEmot {
+	position: absolute;
+	top: 70px;
+	left: 480px;
+	margin: 100px;
+	z-index: 3;
+	visibility: hidden;
+}

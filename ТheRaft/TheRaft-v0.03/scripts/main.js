@@ -181,6 +181,7 @@
         }
         
         function Loss() {
+            var lost = document.getElementById('lost');
             arrowButton.off('click');
             var gll = new Kinetic.Layer();
             var blk = new Kinetic.Rect({
@@ -200,8 +201,21 @@
                 text: 'You have lost!',
                 fill: 'red'
             });
+			
+			 var lt2 = new Kinetic.Text({
+                x: gameStage.width() / 2 - 80,
+                y: gameStage.height() / 2 - 60 ,
+                fontFamily: 'Verdana',
+                fontSize: 30,
+                fontWeight: 'bold',
+                text: 'Time is up!',
+                fill: 'red'
+            });
+			
+            lost.style.visibility='visible';
             gll.add(blk);
             gll.add(lt);
+			gll.add(lt2);
             gameStage.add(gll);
             gll.batchDraw();
         }
@@ -209,6 +223,7 @@
     }
     
     function Win() {
+        var winEmot = document.getElementById('winEmot');
         var won = new Kinetic.Text({
             x: gameStage.width() / 2 - 120,
             y: 100,
@@ -217,18 +232,9 @@
             fontFamily: 'Verdana',
             fill: 'red'
         });
-
-        var won2 = new Kinetic.Text({
-            x: gameStage.width() / 2 - 120,
-            y: 140,
-            text: 'Moves made: ' + game.movesMade + '.',
-            fontSize: 38,
-            fontFamily: 'Verdana',
-            fill: 'red'
-        });
-
+        
+        winEmot.style.visibility='visible';
         gameLayer.add(won);
-        gameLayer.add(won2);
         gameLayer.batchDraw();
     }
 
