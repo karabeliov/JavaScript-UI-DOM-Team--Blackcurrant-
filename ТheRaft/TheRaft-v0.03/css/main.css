@@ -12,6 +12,12 @@
 	width: 800px;
 	margin: auto;
 }
+#coinAnimation {
+	position: absolute;
+	top:60px;
+	left:800px;
+	display: none ;
+}
 
 #description {
 	margin: 0 auto;

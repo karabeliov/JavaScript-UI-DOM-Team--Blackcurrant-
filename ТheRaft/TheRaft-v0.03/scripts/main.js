@@ -53,6 +53,7 @@
         var bg = images.getImage('background');
         var button = document.getElementById('restart');
         var instructionButton = document.getElementById('instructions');
+        document.getElementById("coinAnimation").style.display = 'inline-block';
         var background = new Kinetic.Image({
             x: 0,
             y: 0,
