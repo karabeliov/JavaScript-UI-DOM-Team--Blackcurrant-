@@ -21,9 +21,8 @@ body, html {
 }
 #coinAnimation {
 	position: absolute;
-	top:60px;
-	left:800px;
-	display: none ;
+	top:30%;
+	left:46%;
 }
 
 #description {
@@ -76,6 +75,7 @@ body, html {
 	border-radius: 5px 5px 0 0;
 	border: none;
 	visibility: hidden;
+	z-index: 2;
 }
 
 #restart {
