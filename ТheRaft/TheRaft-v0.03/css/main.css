@@ -3,8 +3,9 @@ body, html {
 	padding: 0;
 }
 
-body {	
-	background-image: url("background.jpg");
+#background {
+	position: absolute;
+	z-index: -1;
 }
 
 #main {
