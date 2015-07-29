@@ -21,8 +21,8 @@ body, html {
 }
 #coinAnimation {
 	position: absolute;
-	top:60px;
-	left:800px;
+	top:20px;
+	left:45%;
 	display: none ;
 }
 
