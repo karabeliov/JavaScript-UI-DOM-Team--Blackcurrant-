@@ -121,8 +121,8 @@ var Raft = (function(){
 			x: this.position[this.side].x,
 			y: this.position[this.side].y,
 			image: this.image, 
-			scaleX: 0.6,
-			scaleY: 0.6
+			scaleX: 0.5,
+			scaleY: 0.5
 		});
 		
 		/*

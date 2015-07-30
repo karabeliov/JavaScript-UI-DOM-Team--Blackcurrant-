@@ -62,6 +62,11 @@ var assets = (function(){
 	    id: 12,
 	    src: 'images/Wrong.png',
 	    data: null
+	}, {
+	    name: 'logo',
+	    id: 12,
+	    src: 'images/logo.png',
+	    data: null
 	}];
 	
 	//The raft
@@ -69,11 +74,11 @@ var assets = (function(){
 		position: {
 			left: {
 				x: 230,
-				y: 180
+				y: 200
 			},
 			right: {
 				x: 460,
-				y: 180
+				y: 200
 			}
 		},
 		seats : {

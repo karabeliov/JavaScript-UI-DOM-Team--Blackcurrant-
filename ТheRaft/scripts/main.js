@@ -1,5 +1,7 @@
 ﻿window.onload = (function () {
     'use strict';
+    
+    /* globals ImageList, Kinetic, game, Timer, Character, Validator   */
 
     var gameStage = new Kinetic.Stage({
         container: 'game',
@@ -39,12 +41,17 @@
     }
     
     function loadingComplete() {
-        loading.setFontSize(40);
-        loading.setX(gameStage.width() / 2 - 100);
-        loading.setText('[ P L A Y ]');
+        loading.remove();
+        var logoimg = images.getImage('logo');
+        var logo = new Kinetic.Image({
+            x: 0,
+            y: 0,
+            image : logoimg
+        });
+        logo.on('click', start);
+        loadscreen.add(logo);
         loadscreen.batchDraw();
         game.status = 'playing';
-        loadscreen.on('click', start);
     }
     
     //This is the enclosing function of the actual game
@@ -53,9 +60,7 @@
         var bg = images.getImage('background');
         var button = document.getElementById('restart');
         var instructionButton = document.getElementById('instructions');
-        var canvas = document.getElementById("coinAnimation");
-        canvas.style.top = '5%';
-        canvas.style.left = '5%';
+        
         var background = new Kinetic.Image({
             x: 0,
             y: 0,
