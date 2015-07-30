@@ -5,12 +5,12 @@ var assets = (function(){
 	assets.images = [{
 	    name: 'background',
 	    id: 1,
-	    src: 'images/background.png',
+	    src: 'images/Background.png',
 	    data: null
 	}, {
 	    name: 'raft',
 	    id: 2,
-	    src: 'images/raft.png',
+	    src: 'images/The_raft.png',
 	    data: null
 	}, {
 	    name: 'policeman',
@@ -35,32 +35,32 @@ var assets = (function(){
 	}, {
 	    name: 'boy1',
 	    id: 7,
-	    src: 'images/Boy_blue.png',
+	    src: 'images/First_son.png',
 	    data: null
 	}, {
 	    name: 'boy2',
 	    id: 8,
-	    src: 'images/Boy_green.png',
+	    src: 'images/Second_son.png',
 	    data: null
 	}, {
 	    name: 'girl1',
 	    id: 9,
-	    src: 'images/Girl_blond.png',
+	    src: 'images/First_daughter.png',
 	    data: null
 	}, {
 	    name: 'girl2',
 	    id: 10,
-	    src: 'images/Girl_brown.png',
+	    src: 'images/Second_daughter.png',
 	    data: null
 	}, {
 	    name: 'arrow',
 	    id: 11,
-	    src: 'images/arrow.png',
+	    src: 'images/Arrow.png',
 	    data: null
 	}, {
 	    name: 'wrong',
 	    id: 12,
-	    src: 'images/wrong.png',
+	    src: 'images/Wrong.png',
 	    data: null
 	}];
 	

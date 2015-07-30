@@ -46,7 +46,7 @@ var Timer = (function(){
            }, 1000);
         }
         
-    }
+    };
     
     return Timer;
 })();

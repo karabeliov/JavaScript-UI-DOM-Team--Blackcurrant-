@@ -111,17 +111,17 @@
       stroke: 'black'
   });
 		
-  layer.add(rect);
-  layer.add(text);
-  layer.add(line1);
-  layer.add(line2);
-  layer.add(line3);
-  layer.add(line4);
-  layer.add(line5);
-  layer.add(line6);
-  layer.add(line7);
-  layer.add(line8);
-  stage.add(layer);
+      layer.add(rect);
+      layer.add(text);
+      layer.add(line1);
+      layer.add(line2);
+      layer.add(line3);
+      layer.add(line4);
+      layer.add(line5);
+      layer.add(line6);
+      layer.add(line7);
+      layer.add(line8);
+      stage.add(layer);
   }
   
   function visibility() {

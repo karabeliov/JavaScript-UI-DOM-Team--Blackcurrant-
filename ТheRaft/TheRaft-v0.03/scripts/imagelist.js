@@ -12,9 +12,11 @@ var ImageList = (function() {
 	};
 
 	Loader.prototype.onProgress = function(c) {
-		// if (typeof c !== 'function') {
-		// 	throw 'Callback must be a function!';
-		// }
+		/*
+		   if (typeof c !== 'function') {
+		   	throw 'Callback must be a function!';
+		   }
+		*/
 		this.progress = c;
 	};
 
@@ -29,11 +31,13 @@ var ImageList = (function() {
 			this.load();
 			return;
 		}
-		//For testing:
-		// for (var j = 0; j < 100000000; j++) {
-			
-		// }
-		//End testing.
+		/*
+		  For testing:
+		   for (var j = 0; j < 100000000; j++) {
+
+		   }
+		  End testing.
+		*/
 		this.progress(Math.round((this.loaded * 100) / this.count));
 	};
 

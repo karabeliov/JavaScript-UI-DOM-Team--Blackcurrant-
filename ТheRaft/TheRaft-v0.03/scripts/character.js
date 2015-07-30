@@ -56,9 +56,11 @@ var Character = (function(){
 			return;
 		}
 
-		//then get position for animation, assign true to the seat of the raft
-		//assing the opposite side for the character and start animation
-		//console.log('going to raft, side: ' + this.raft.side);
+		/*
+		  then get position for animation, assign true to the seat of the raft
+		  assing the opposite side for the character and start animation
+		  console.log('going to raft, side: ' + this.raft.side);
+		*/
 		var goto = this.raft.takeASeat(this);
 		this.side = 'raft';
 		this.seat = goto.seat;
@@ -85,9 +87,11 @@ var Character = (function(){
 			scaleX: scale,
 			scaleY: scale
 		});
+
 		this.player.on('click', function(){
 			self.onClick();
 		});
+
 		this.layer.add(this.player);
 	};
 	

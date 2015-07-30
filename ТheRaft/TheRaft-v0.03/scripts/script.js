@@ -3,11 +3,12 @@
         sail = 0,
         conflict;  // conflict = all.onShore && criminalMan.onShore || boys.onShore && mother.onShore || girls.onShore && father.onShore;
 
-    //  Conflict:
-    //  criminalMan 	-		with any one unless the cop is with him
-    //  girls		    -		with father unless the mother is with them
-    //  boys		    -		with mother unless the father is with them
-
+    /*
+        Conflict:
+        criminalMan 	-		with any one unless the cop is with him
+        girls		    -		with father unless the mother is with them
+        boys		    -		with mother unless the father is with them
+    */
     var Person = {
         onShore: true
     };

@@ -61,7 +61,7 @@ var Raft = (function(){
 	
 	Raft.prototype.unseat = function (c) {
 		if (!(c instanceof Character)) {
-			throw 'Argument suplied is not a valid character!';
+			throw 'Argument supplied is not a valid character!';
 		}
 
 		var reseated = [];
@@ -79,11 +79,11 @@ var Raft = (function(){
 
 			this.seated = reseated;
 		}
-	}
+	};
 	
 	Raft.prototype.takeASeat = function (c) {
 		if(!(c instanceof Character)) {
-			throw 'Argument suplied is not a valid character!';
+			throw 'Argument supplied is not a valid character!';
 		}
 
 		if (this.seated.length < 2) {
@@ -123,9 +123,11 @@ var Raft = (function(){
 			image: this.image
 		});
 		
-		// this.player.on('click', function(){
-		// 	self.travel();
-		// });
+		/*
+		   this.player.on('click', function(){
+		   self.travel();
+		   });
+		*/
 		this.layer.add(this.player);
 		this.layer.batchDraw();
 	};
