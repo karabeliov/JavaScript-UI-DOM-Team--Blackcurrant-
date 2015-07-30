@@ -68,12 +68,12 @@ var assets = (function(){
 	assets.raft = {
 		position: {
 			left: {
-				x: 270,
-				y: 300
+				x: 230,
+				y: 180
 			},
 			right: {
-				x: 500,
-				y: 300
+				x: 460,
+				y: 180
 			}
 		},
 		seats : {

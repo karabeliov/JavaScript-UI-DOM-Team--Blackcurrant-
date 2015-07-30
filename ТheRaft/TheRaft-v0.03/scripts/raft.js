@@ -120,7 +120,9 @@ var Raft = (function(){
 		this.player = new Kinetic.Image({
 			x: this.position[this.side].x,
 			y: this.position[this.side].y,
-			image: this.image
+			image: this.image, 
+			scaleX: 0.6,
+			scaleY: 0.6
 		});
 		
 		/*
