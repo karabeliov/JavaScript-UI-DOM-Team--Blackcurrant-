@@ -5,7 +5,7 @@ var assets = (function(){
 	assets.images = [{
 	    name: 'background',
 	    id: 1,
-	    src: 'images/Background.png',
+	    src: 'images/background.png',
 	    data: null
 	}, {
 	    name: 'raft',
@@ -55,12 +55,12 @@ var assets = (function(){
 	}, {
 	    name: 'arrow',
 	    id: 11,
-	    src: 'images/Arrow.png',
+	    src: 'images/arrow.png',
 	    data: null
 	}, {
 	    name: 'wrong',
 	    id: 12,
-	    src: 'images/Wrong.png',
+	    src: 'images/wrong.png',
 	    data: null
 	}, {
 	    name: 'logo',
